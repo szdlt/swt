@@ -527,7 +527,10 @@ namespace mbit_小车类 {
         
         S1 = 1,
         S2,
-        S3
+        S3,
+	S4,
+        S5,
+        S6,
     }
     export enum CarState {
         //% blockId="Car_Run" block="前行"
