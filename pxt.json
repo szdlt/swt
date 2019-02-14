@@ -1,23 +1,21 @@
 {
     "name": "mbit",
-    "version": "2.0.0",
-    "description": "Extension for YahBoom m:bit V2.0.0",
+    "version": "1.1.0",
+    "description": "Extension for YahBoom m:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.6.9",
-        "Mbit_IR":  "github:lzty634158/yahboom_mbit_IR"
-	
-
+        "neopixel": "github:microsoft/pxt-neopixel#v0.3.10",
+        "Mbit_IR": "github:lzty634158/yahboom_mbit_IR"
     },
     "files": [
         "README.md",
         "main.ts",
         "_locales/zh/mbit-strings.json"
-
     ],
     "testFiles": [
         "test.ts"
     ],
-    "public": true
+    "public": true,
+    "installedVersion": "github:lzty634158/yahboom_mbit#5f787118b0edf9ec2716d611a9c8bc7985b8f639"
 }
