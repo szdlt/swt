@@ -530,7 +530,7 @@ namespace mbit_小车类 {
         S3,
 	S4,
         S5,
-	s6
+	S6
 	    
     }
     export enum CarState {
