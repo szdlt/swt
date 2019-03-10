@@ -3,9 +3,8 @@ R
 modified from liusen
 load dependency
 "dlbot": "file:../pxt-dlbot"
+2019.0310.15:39
 */
-
-
 
 //% color="#C814B8" weight=25 icon="\uf1d4"
 namespace dlbot_显示类 {
@@ -222,6 +221,44 @@ namespace dlbot_传感器类 {
     const APDS9960_POFFSET_UR = 0x9D;
     const APDS9960_POFFSET_DL = 0x9E;
     const APDS9960_CONFIG3 = 0x9F;
+	
+	const LED_DRIVE_100MA = 0;
+    const LED_DRIVE_50MA = 1;
+    const LED_DRIVE_25MA = 2;
+    const LED_DRIVE_12_5MA = 3;
+
+    /* ALS Gain (AGAIN) values */
+    const AGAIN_1X = 0;
+    const AGAIN_4X = 1;
+    const AGAIN_16X = 2;
+    const AGAIN_64X = 3;
+    
+    /* Default values */
+    const DEFAULT_ATIME = 219;    // 103ms
+    const DEFAULT_WTIME = 246;    // 27ms
+    const DEFAULT_PROX_PPULSE = 0x87;    // 16us, 8 pulses
+    const DEFAULT_GESTURE_PPULSE = 0x89;    // 16us, 10 pulses
+    const DEFAULT_POFFSET_UR = 0;       // 0 offset
+    const DEFAULT_POFFSET_DL = 0;       // 0 offset      
+    const DEFAULT_CONFIG1 = 0x60;    // No 12x wait (WTIME) factor
+    const DEFAULT_PILT = 0;       // Low proximity threshold
+    const DEFAULT_PIHT = 50;      // High proximity threshold
+    const DEFAULT_AILT = 0xFFFF;  // Force interrupt for calibration
+    const DEFAULT_AIHT = 0;
+    const DEFAULT_PERS = 0x11;    // 2 consecutive prox or ALS for int.
+    const DEFAULT_CONFIG2 = 0x01;    // No saturation interrupts or LED boost  
+    const DEFAULT_CONFIG3 = 0;       // Enable all photodiodes, no SAI
+    const DEFAULT_GPENTH = 40;      // Threshold for entering gesture mode
+    const DEFAULT_GEXTH = 30;      // Threshold for exiting gesture mode    
+    const DEFAULT_GCONF1 = 0x40;    // 4 gesture events for int., 1 for exit
+    const DEFAULT_GOFFSET = 0;       // No offset scaling for gesture mode
+    const DEFAULT_GPULSE = 0xC9;    // 32us, 10 pulses
+    const DEFAULT_GCONF3 = 0;       // All photodiodes active during gesture
+    const DEFAULT_GIEN = 0;       // Disable gesture interrupts
+    const DEFAULT_LDRIVE = LED_DRIVE_100MA;
+    const DEFAULT_AGAIN = AGAIN_4X;
+	
+	
     const OFF = 0;
     const ON = 1;
     const POWER = 0;
@@ -246,8 +283,12 @@ namespace dlbot_传感器类 {
         let val = pins.i2cReadNumber(APDS9960_I2C_ADDR, NumberFormat.UInt8BE);
         return val;
     }
-	
-   function InitColor(): boolean {
+	//% blockId=dlbot_InitColor block="InitColor|value %value"
+    //% weight=95
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
+  export function InitColor(): boolean {
          let id = i2cread(APDS9960_ID);
         //  serial.writeLine("id:")
         //  serial.writeNumber(id); 
