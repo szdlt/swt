@@ -1,10 +1,11 @@
-/*
+/*  17:00
 R
 modified from liusen
 load dependency
 "dlbot": "file:../pxt-dlbot"
-2019.0310.16:49
 */
+
+
 
 //% color="#C814B8" weight=25 icon="\uf1d4"
 namespace dlbot_显示类 {
@@ -283,12 +284,8 @@ namespace dlbot_传感器类 {
         let val = pins.i2cReadNumber(APDS9960_I2C_ADDR, NumberFormat.UInt8BE);
         return val;
     }
-	//% blockId=dlbot_InitColor block="InitColor|value %value"
-    //% weight=95
-    //% blockGap=10
-    //% color="#006400"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
-  export function InitColor(): boolean {
+	
+   function InitColor(): boolean {
          let id = i2cread(APDS9960_ID);
         //  serial.writeLine("id:")
         //  serial.writeNumber(id); 
@@ -450,7 +447,11 @@ namespace dlbot_传感器类 {
            val = val + val_byte << 8;
            return val;
        }
-	
+	//% blockId=dlbot_initColorSensor block="initColorSensor|value %value"
+    //% weight=95
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function initColorSensor() {
            InitColor();
 		   enableLightSensor(false);
