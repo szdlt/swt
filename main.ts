@@ -170,13 +170,316 @@ namespace dlbot_传感器类 {
         NoVoice = 1
     }
 
+	export enum Colors {
+        //% blockId="Red" block="Red"
+        Red = 0x01,
+        //% blockId="Green" block="Green"
+        Green = 0x02,
+        //% blockId="Blue" block="Blue"
+        Blue = 0x03,
+	//% blockId="White" block="White"
+        White = 0x04,
+	//% blockId="Black" block="Black"
+        Black = 0x05	
+    }
+	
     export enum enIR {
         //% blockId="Get" block="检测到"
         Get = 0,
         //% blockId="NoVoice" block="未检测"
         NoGet = 1
     }
+	
+    const APDS9960_I2C_ADDR = 0x39;
+    const APDS9960_ID_1 = 0xA8;
+    const APDS9960_ID_2 = 0x9C;
+    /* APDS-9960 register addresses */
+    const APDS9960_ENABLE = 0x80;
+    const APDS9960_ATIME  = 0x81;
+    const APDS9960_WTIME  = 0x83;
+    const APDS9960_AILTL  = 0x84;
+    const APDS9960_AILTH  = 0x85;
+    const APDS9960_AIHTL  = 0x86;
+    const APDS9960_AIHTH  = 0x87;
+    const APDS9960_PILT = 0x89;
+    const APDS9960_PIHT = 0x8B;
+    const APDS9960_PERS = 0x8C;
+    const APDS9960_CONFIG1 = 0x8D;
+    const APDS9960_PPULSE  = 0x8E;
+    const APDS9960_CONTROL = 0x8F;
+    const APDS9960_CONFIG2 = 0x90;
+    const APDS9960_ID = 0x92;
+    const APDS9960_STATUS  = 0x93;
+    const APDS9960_CDATAL  = 0x94;
+    const APDS9960_CDATAH  = 0x95;
+    const APDS9960_RDATAL  = 0x96;
+    const APDS9960_RDATAH  = 0x97;
+    const APDS9960_GDATAL  = 0x98;
+    const APDS9960_GDATAH  = 0x99;
+    const APDS9960_BDATAL  = 0x9A;
+    const APDS9960_BDATAH  = 0x9B;
+    const APDS9960_PDATA   = 0x9C;
+    const APDS9960_POFFSET_UR = 0x9D;
+    const APDS9960_POFFSET_DL = 0x9E;
+    const APDS9960_CONFIG3 = 0x9F;
+    const OFF = 0;
+    const ON = 1;
+    const POWER = 0;
+    const AMBIENT_LIGHT = 1;
+    const PROXIMITY = 2;
+    const WAIT = 3;
+    const AMBIENT_LIGHT_INT = 4;
+    const PROXIMITY_INT = 5;
+    const GESTURE = 6;
+    const ALL = 7;
+
+
+    function i2cwrite(reg: number, value: number) {
+       let buf = pins.createBuffer(2);
+       buf[0] = reg;
+       buf[1] = value;
+       pins.i2cWriteBuffer(APDS9960_I2C_ADDR, buf);
+    }
+
+     function i2cread(reg: number): number {
+		pins.i2cWriteNumber(APDS9960_I2C_ADDR, reg, NumberFormat.UInt8BE);
+        let val = pins.i2cReadNumber(APDS9960_I2C_ADDR, NumberFormat.UInt8BE);
+        return val;
+    }
+	
+   function InitColor(): boolean {
+         let id = i2cread(APDS9960_ID);
+        //  serial.writeLine("id:")
+        //  serial.writeNumber(id); 
+        if (!(id == APDS9960_ID_1 || id == APDS9960_ID_2)) {
+            return false;
+         }
+        //  serial.writeLine("set mode:")
+        setMode(ALL, OFF);
+        i2cwrite(APDS9960_ATIME, DEFAULT_ATIME);
+        i2cwrite(APDS9960_WTIME, DEFAULT_WTIME);
+        i2cwrite(APDS9960_PPULSE, DEFAULT_PROX_PPULSE);
+        i2cwrite(APDS9960_POFFSET_UR, DEFAULT_POFFSET_UR);
+        i2cwrite(APDS9960_POFFSET_DL, DEFAULT_POFFSET_DL);
+        i2cwrite(APDS9960_CONFIG1, DEFAULT_CONFIG1);
+        setLEDDrive(DEFAULT_LDRIVE);
+        setAmbientLightGain(DEFAULT_AGAIN);
+        setLightIntLowThreshold(DEFAULT_AILT);
+        setLightIntHighThreshold(DEFAULT_AIHT);
+        i2cwrite(APDS9960_PERS, DEFAULT_PERS);
+        i2cwrite(APDS9960_CONFIG2, DEFAULT_CONFIG2);
+        i2cwrite(APDS9960_CONFIG3, DEFAULT_CONFIG3);
+        return true;  
+    }
+	    
+     function setMode(mode: number, enable: number) {
+         let reg_val = getMode();
+            /* Change bit(s) in ENABLE register */
+        enable = enable & 0x01;
+         if (mode >= 0 && mode <= 6)
+         {
+             if (enable > 0)
+             {
+                reg_val |= (1 << mode);
+             }
+             else
+             {
+                //reg_val &= ~(1 << mode);
+                 reg_val &= (0xff-(1 << mode)); 
+             }
+        }
+         else if(mode == ALL)
+         {
+             if (enable > 0)
+             {
+                reg_val = 0x7F;
+             }
+             else
+             {
+                reg_val = 0x00;
+             }
+        }
+        i2cwrite(APDS9960_ENABLE,reg_val);
+    }
     
+     function getMode(): number {
+            let enable_value = i2cread(APDS9960_ENABLE);
+            return enable_value;
+        }
+
+     function setLEDDrive(drive: number) {
+        let val = i2cread(APDS9960_CONTROL);
+            /* Set bits in register to given value */
+         drive &= 0b00000011;
+         drive = drive << 6;
+         val &= 0b00111111;
+         val |= drive;
+         i2cwrite(APDS9960_CONTROL,val);
+    }
+    
+     function setLightIntLowThreshold(threshold: number) {
+        let val_low = threshold & 0x00FF;
+        let val_high = (threshold & 0xFF00) >> 8;
+        i2cwrite(APDS9960_AILTL, val_low);
+        i2cwrite(APDS9960_AILTH,val_high);
+    }
+
+     function setLightIntHighThreshold(threshold: number) {
+        let val_low = threshold & 0x00FF;
+        let val_high = (threshold & 0xFF00) >> 8;
+        i2cwrite(APDS9960_AIHTL, val_low);
+        i2cwrite(APDS9960_AIHTH, val_high);
+    }
+
+	
+	function enableLightSensor(interrupts: boolean) {
+        setAmbientLightGain(DEFAULT_AGAIN);
+        if (interrupts)
+        {
+            setAmbientLightIntEnable(1);
+        }   
+        else
+        {
+            setAmbientLightIntEnable(0);
+        }
+        enablePower();
+        setMode(AMBIENT_LIGHT,1);
+    }
+
+     function setAmbientLightGain(drive: number) {
+        let val = i2cread(APDS9960_CONTROL);
+            /* Set bits in register to given value */
+        drive &= 0b00000011;
+        val &= 0b11111100;
+        val |= drive;
+        i2cwrite(APDS9960_CONTROL,val);
+    }
+
+     function getAmbientLightGain(): number {
+        let val = i2cread(APDS9960_CONTROL);
+        val &= 0b00000011;
+        return val;
+    }
+
+     function enablePower() {
+        setMode(POWER,1);
+    }
+
+     function setAmbientLightIntEnable(enable: number) {
+        let val = i2cread(APDS9960_ENABLE);
+            /* Set bits in register to given value */
+        enable &= 0b00000001;
+        enable = enable << 4;
+        val &= 0b11101111;
+        val |= enable;
+        i2cwrite(APDS9960_ENABLE, val);
+    }
+
+     function readAmbientLight(): number {
+        let val_byte = i2cread(APDS9960_CDATAL);
+        let val = val_byte;
+        val_byte = i2cread(APDS9960_CDATAH);
+        val = val + val_byte << 8;
+        return val;
+    }
+	
+	function readRedLight(): number {
+     
+        let val_byte = i2cread(APDS9960_RDATAL);
+        let val = val_byte;
+        val_byte = i2cread(APDS9960_RDATAH);
+        val = val + val_byte << 8;
+        return val;
+    }
+
+     function readGreenLight(): number {
+        
+           let val_byte = i2cread(APDS9960_GDATAL);
+           let val = val_byte;
+           val_byte = i2cread(APDS9960_GDATAH);
+           val = val + val_byte << 8;
+           return val;
+    }
+    
+     function readBlueLight(): number {
+        
+           let val_byte = i2cread(APDS9960_BDATAL);
+           let val = val_byte;
+           val_byte = i2cread(APDS9960_BDATAH);
+           val = val + val_byte << 8;
+           return val;
+       }
+	
+    export function initColorSensor() {
+           InitColor();
+		   enableLightSensor(false);
+		   control.waitMicros(100);
+	}
+
+       /**
+	 *  Color sensor to obtain color value.
+	*/
+    //% weight=84 blockId=checkCurrentColor block="Current color %color" 
+    export function checkCurrentColor(color: Colors): boolean {
+     //       setBrightness(150);     
+     //       setPixelRGB(Lights.Light1, DlbitRGBColors.White);
+     //       setPixelRGB(Lights.Light2, DlbitRGBColors.White);
+     //       showLight(); 
+		let r = readRedLight();
+		let g = readGreenLight();
+		let b = readBlueLight();
+            let t = Colors.Red;
+    
+		if (r > g)
+		{
+			t = Colors.Red;
+		}	
+		else
+		{
+			t = Colors.Green;
+		}	
+
+		if (t == Colors.Green && g < b)
+		{
+			if(b - g > 1000)
+			   t = Colors.Blue;
+		}	
+		if (t == Colors.Red && r < b)
+		{
+			t = Colors.Blue;
+         }
+//          serial.writeNumber(r); 
+//          serial.writeLine("->red");
+//          serial.writeNumber(g); 
+//          serial.writeLine("->green"); 
+//          serial.writeNumber(b); 
+//          serial.writeLine("->blue"); 
+	     
+	       if(r > 6800 && g > 8000 && b > 12000)
+	       {
+		       t = Colors.White;
+	       }
+	       else if(r < 800 && g < 1100 && b < 1300)
+		{
+		        t = Colors.Black;
+		 }
+		else if (t == Colors.Blue && b > 2800) {
+               //        serial.writeLine("blue");
+            
+		}
+		else if (t == Colors.Green && g > 1500) {
+                // serial.writeLine("green");
+		}
+		else if (t == Colors.Red && r > 3000) {
+			//serial.writeLine("red");
+		}
+		else
+        {
+            //serial.writeLine("none");
+            return false;
+        }		
+        return (color == t);
+	}
 
     //% blockId=dlbot_Voice_Sensor block="Voice_Sensor|pin %pin|value %value"
     //% weight=100
@@ -549,7 +852,7 @@ namespace dlbot_小车类 {
         Car_SpinRight = 7
     }
 
-    function i2cwrite(addr: number, reg: number, value: number) {
+    function i2cwrite_(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
         buf[0] = reg
         buf[1] = value
@@ -569,7 +872,7 @@ namespace dlbot_小车类 {
     }
 
     function initPCA9685(): void {
-        i2cwrite(PCA9685_ADD, MODE1, 0x00)
+        i2cwrite_(PCA9685_ADD, MODE1, 0x00)
         setFreq(50);
         initialized = true
     }
@@ -583,11 +886,11 @@ namespace dlbot_小车类 {
         let prescale = prescaleval; //Math.Floor(prescaleval + 0.5);
         let oldmode = i2cread(PCA9685_ADD, MODE1);
         let newmode = (oldmode & 0x7F) | 0x10; // sleep
-        i2cwrite(PCA9685_ADD, MODE1, newmode); // go to sleep
-        i2cwrite(PCA9685_ADD, PRESCALE, prescale); // set the prescaler
-        i2cwrite(PCA9685_ADD, MODE1, oldmode);
+        i2cwrite_(PCA9685_ADD, MODE1, newmode); // go to sleep
+        i2cwrite_(PCA9685_ADD, PRESCALE, prescale); // set the prescaler
+        i2cwrite_(PCA9685_ADD, MODE1, oldmode);
         control.waitMicros(5000);
-        i2cwrite(PCA9685_ADD, MODE1, oldmode | 0xa1);
+        i2cwrite_(PCA9685_ADD, MODE1, oldmode | 0xa1);
     }
 
     function setPwm(channel: number, on: number, off: number): void {
