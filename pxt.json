@@ -11,6 +11,8 @@
     "files": [
         "README.md",
         "main.ts",
+        "QbitRGBLight.ts",
+        "sendbuffer.asm",
         "_locales/zh/mbit-strings.json"
     ],
     "testFiles": [
