@@ -3,7 +3,7 @@ R
 modified from liusen
 load dependency
 "dlbot": "file:../pxt-dlbot"
-2019.0310.15:39
+2019.0310.16:49
 */
 
 //% color="#C814B8" weight=25 icon="\uf1d4"
@@ -538,7 +538,91 @@ namespace dlbot_传感器类 {
         }
 
     }
+    //% blockId=dlbot_Incline_Sensor block="Incline_Sensor|pin %pin| |%value|倾斜"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Incline_Sensor(pin: DigitalPin, value: enIR): boolean {
 
+        pins.setPull(pin, PinPullMode.PullUp);
+        //IR_send_38k();
+        if (pins.digitalReadPin(pin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+	
+	//% blockId=dlbot_Smog_Sensor block="Incline_Sensor|pin %pin| |%value|烟雾"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Smog_Sensor(pin: DigitalPin, value: enIR): boolean {
+		
+        pins.setPull(pin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(pin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+	
+	//% blockId=dlbot_Touch_Sensor block="Touch_Sensor|pin %pin| |%value|触摸"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Touch_Sensor(pin: DigitalPin, value: enIR): boolean {
+		
+        pins.setPull(pin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(pin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+	//% blockId=dlbot_Photosensitive_Sensor block="Photosensitive_Sensor|pin %pin| |%value|光照"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Photosensitive_Sensor(pin: DigitalPin, value: enIR): boolean {
+		
+        pins.setPull(pin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(pin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+	
+	//% blockId=dlbot_Flame_Sensor block="Flame_Sensor|pin %pin| |%value|火焰"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Flame_Sensor(pin: DigitalPin, value: enIR): boolean {
+		
+        pins.setPull(pin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(pin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+	
     function IR_send_38k() {
         for (let i: number = 0; i < 8; i++) {
             pins.digitalWritePin(DigitalPin.P9, 1);
