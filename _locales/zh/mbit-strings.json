@@ -15,7 +15,12 @@
   "dlbot_传感器类.IR_Send|block": "红外发射|引脚 %pin",
   "dlbot_传感器类.Ultrasonic|block": "超声波|发射管脚 %Trig|接收管脚 %Echo",
   "dlbot_传感器类.checkCurrentColor|block": "检测颜色是否是 %color",
-  "dlbot_传感器类.initRGBLight|block": "颜色传感器初始化",
+  "dlbot_传感器类.InitColor|block": "颜色传感器初始化",
+  "dlbot_传感器类.Photosensitive_Sensor|block": "光敏传感器|引脚 %pin|  |%value|光照",
+  "dlbot_传感器类.Incline_Sensor|block": "倾斜传感器|引脚 %pin|  |%value|倾斜",
+  "dlbot_传感器类.Flame_Sensor|block": "火焰传感器|引脚 %pin|  |%value|火焰",
+  "dlbot_传感器类.Smog_Sensor|block": "烟雾传感器|引脚 %pin|  |%value|烟雾",
+  "dlbot_传感器类.Touch_Sensor|block": "触摸传感器|引脚 %pin|  |%value|触摸",
   
   "dlbot_音乐类.Buzzer|block": "有源蜂鸣器|引脚 %pin|值 %value",
 
