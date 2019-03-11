@@ -1,4 +1,4 @@
-/*  17:00
+/*  2019.0311.17:00
 R
 modified from liusen
 load dependency
@@ -831,7 +831,28 @@ namespace dlbot_音乐类 {
 
 //% color="#0000CD" weight=21 icon="\uf185"
 namespace dlbot_电机类 {
+    //% blockId=Vibrator_Open block="Vibrator_Open"
+    //% weight=100
+    //% blockGap=10
+    //% color="#0000CD"
+    //% value.min=0 value.max=1023
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
+    export function Vibrator_Open(): void {
 
+        pins.digitalWritePin(DigitalPin.P12, 1);
+
+    }
+	//% blockId=Vibrator_Close block="Vibrator_Close"
+    //% weight=100
+    //% blockGap=10
+    //% color="#0000CD"
+    //% value.min=0 value.max=1023
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
+    export function Vibrator_Close(): void {
+
+        pins.digitalWritePin(DigitalPin.P12, 0);
+
+    }
     //% blockId=dlbot_Fan block="Fan|pin %pin|speed %value"
     //% weight=100
     //% blockGap=10
