@@ -1,4 +1,4 @@
-/*  2019.0311.17:00
+/*  2019.0311.19:42
 R
 modified from liusen
 load dependency
@@ -1310,18 +1310,34 @@ namespace dlbot_小车类 {
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Ultrasonic_Car(): number {
-
-        // send pulse
-        pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
-        pins.digitalWritePin(DigitalPin.P14, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(DigitalPin.P14, 1);
-        control.waitMicros(10);
-        pins.digitalWritePin(DigitalPin.P14, 0);
+   let echoPin:DigitalPin = DigitalPin.P15;
+   let trigPin:DigitalPin = DigitalPin.P14;
+   pins.setPull(echoPin, PinPullMode.PullNone);
+   pins.setPull(trigPin, PinPullMode.PullNone);
+		   
+   // send pulse
+   pins.digitalWritePin(trigPin, 0);
+   control.waitMicros(5);
+   pins.digitalWritePin(trigPin, 1);
+   control.waitMicros(10);
+   pins.digitalWritePin(trigPin, 0);
+   control.waitMicros(5);
+   // read pulse
+   let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
+    basic.pause(10);
+    return d / 40;  
+	    	    
+    // send pulse
+    //    pins.setPull(DigitalPin.P14, PinPullMode.PullNone);    
+    //    pins.digitalWritePin(DigitalPin.P14, 0);
+    //     control.waitMicros(2);
+     //   pins.digitalWritePin(DigitalPin.P14, 1);
+     //   control.waitMicros(10);
+     //   pins.digitalWritePin(DigitalPin.P14, 0);
 
         // read pulse
-        let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
-        return d / 58;
+     //   let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
+     //  return d / 58;
     }
 
     //% blockId=dlbot_Music_Car block="Music_Car|%index"
