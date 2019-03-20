@@ -11,7 +11,7 @@
     "files": [
         "README.md",
         "main.ts",
-        "_locales/zh/mbit-strings.json"
+        "_locales/zh/newbit-strings.json"
     ],
     "testFiles": [
         "test.ts"
