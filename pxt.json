@@ -1,12 +1,12 @@
 {
-    "name": "Newbit",
+    "name": "newbit",
     "version": "1.0.0",
-    "description": "Extension for Dlbot New:bit",
+    "description": "Extension for Siwutian new:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*",
         "neopixel": "github:microsoft/pxt-neopixel#v0.6.9",
-        "Mbit_IR":  "github:lzty634158/yahboom_mbit_IR"
+        "newbit_IR":  "github:lzty634158/yahboom_mbit_IR"
     },
     "files": [
         "README.md",
