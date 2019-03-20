@@ -1,6 +1,6 @@
-# mbit
+# newbit
 
-Extension for Yahboom mbit
+Extension for SiWuTian newbit
 
 ## License
 
