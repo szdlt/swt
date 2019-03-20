@@ -1,4 +1,4 @@
-/*  2019.0311.19:42
+/*  2019.0320.14:53
 R
 modified from duncan
 load dependency
@@ -220,7 +220,7 @@ namespace newbit_传感器类 {
     const APDS9960_POFFSET_DL = 0x9E;
     const APDS9960_CONFIG3 = 0x9F;
 	
-	const LED_DRIVE_100MA = 0;
+    const LED_DRIVE_100MA = 0;
     const LED_DRIVE_50MA = 1;
     const LED_DRIVE_25MA = 2;
     const LED_DRIVE_12_5MA = 3;
@@ -277,7 +277,7 @@ namespace newbit_传感器类 {
     }
 
      function i2cread(reg: number): number {
-		pins.i2cWriteNumber(APDS9960_I2C_ADDR, reg, NumberFormat.UInt8BE);
+        pins.i2cWriteNumber(APDS9960_I2C_ADDR, reg, NumberFormat.UInt8BE);
         let val = pins.i2cReadNumber(APDS9960_I2C_ADDR, NumberFormat.UInt8BE);
         return val;
     }
@@ -444,7 +444,7 @@ namespace newbit_传感器类 {
            val = val + val_byte << 8;
            return val;
        }
-	//% blockId=newbit_initColorSensor block="initColorSensor|value %value"
+    //% blockId=newbit_initColorSensor block="initColorSensor|value %value"
     //% weight=95
     //% blockGap=10
     //% color="#006400"
@@ -455,10 +455,14 @@ namespace newbit_传感器类 {
 		   control.waitMicros(100);
 	}
 
-       /**
+        /*
 	 *  Color sensor to obtain color value.
-	*/
-    //% weight=84 blockId=checkCurrentColor block="Current color %color" 
+	 */
+    //% weight=84 blockId=newbit_checkCurrentColor block="checkCurrentColor|color %color" 
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function checkCurrentColor(color: Colors): boolean {
      //       setBrightness(150);     
      //       setPixelRGB(Lights.Light1, DlbitRGBColors.White);
@@ -554,7 +558,7 @@ namespace newbit_传感器类 {
 
     }
 	
-	//% blockId=newbit_Smog_Sensor block="Incline_Sensor|pin %pin| |%value|烟雾"
+    //% blockId=newbit_Smog_Sensor block="Smog_Sensor|pin %pin| |%value|烟雾"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -571,7 +575,7 @@ namespace newbit_传感器类 {
 
     }
 	
-	//% blockId=newbit_Touch_Sensor block="Touch_Sensor|pin %pin| |%value|触摸"
+    //% blockId=newbit_Touch_Sensor block="Touch_Sensor|pin %pin| |%value|触摸"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -587,7 +591,7 @@ namespace newbit_传感器类 {
         }
 
     }
-	//% blockId=newbit_Photosensitive_Sensor block="Photosensitive_Sensor|pin %pin| |%value|光照"
+    //% blockId=newbit_Photosensitive_Sensor block="Photosensitive_Sensor|pin %pin| |%value|光照"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -604,7 +608,7 @@ namespace newbit_传感器类 {
 
     }
 	
-	//% blockId=newbit_Flame_Sensor block="Flame_Sensor|pin %pin| |%value|火焰"
+    //% blockId=newbit_Flame_Sensor block="Flame_Sensor|pin %pin| |%value|火焰"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -828,7 +832,7 @@ namespace newbit_音乐类 {
 
 //% color="#0000CD" weight=21 icon="\uf185"
 namespace newbit_电机类 {
-    //% blockId=Vibrator_Open block="Vibrator_Open"
+    //% blockId=newbit_Vibrator_Open block="Vibrator_Open"
     //% weight=100
     //% blockGap=10
     //% color="#0000CD"
@@ -839,7 +843,7 @@ namespace newbit_电机类 {
         pins.digitalWritePin(DigitalPin.P12, 1);
 
     }
-	//% blockId=Vibrator_Close block="Vibrator_Close"
+    //% blockId=newbit_Vibrator_Close block="Vibrator_Close"
     //% weight=100
     //% blockGap=10
     //% color="#0000CD"
@@ -917,7 +921,7 @@ namespace newbit_小车类 {
         Cyan,
         //% blockId="Pinkish" block="品红"
         Pinkish,
-        //% blockId="Green" block="黄色"
+        //% blockId="Yellow" block="黄色"
         Yellow,
 
     }
