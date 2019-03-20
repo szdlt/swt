@@ -166,27 +166,25 @@ namespace newbit_传感器类 {
         //% blockId="NoVoice" block="无声音"
         NoVoice = 1
     }
-
-	export enum Colors {
-        //% blockId="Red" block="Red"
-        Red = 0x01,
-        //% blockId="Green" block="Green"
-        Green = 0x02,
-        //% blockId="Blue" block="Blue"
-        Blue = 0x03,
-	//% blockId="White" block="White"
-        White = 0x04,
-	//% blockId="Black" block="Black"
-        Black = 0x05	
-    }
-	
     export enum enIR {
         //% blockId="Get" block="检测到"
         Get = 0,
         //% blockId="NoVoice" block="未检测"
         NoGet = 1
     }
-	
+#if 0
+   export enum Colors {
+        //% blockId="Red" block="红色"
+        Red = 0x01,
+        //% blockId="Green" block="绿色"
+        Green = 0x02,
+        //% blockId="Blue" block="蓝色"
+        Blue = 0x03,
+	//% blockId="White" block="白色"
+        White = 0x04,
+	//% blockId="Black" block="黑色"
+        Black = 0x05	
+    }	
     const APDS9960_I2C_ADDR = 0x39;
     const APDS9960_ID_1 = 0xA8;
     const APDS9960_ID_2 = 0x9C;
@@ -523,7 +521,7 @@ namespace newbit_传感器类 {
         }		
         return (color == t);
 	}
-
+    #endif
     //% blockId=newbit_Voice_Sensor block="Voice_Sensor|pin %pin|value %value"
     //% weight=100
     //% blockGap=10
