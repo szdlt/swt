@@ -24,7 +24,7 @@ namespace newbit_显示类 {
         //% blockId="Pinkish" block="品红"
         Pinkish,
         //% blockId="Yellow" block="黄色"
-        Yellow,
+        Yellow
 
     }
     export enum enLED1 {
