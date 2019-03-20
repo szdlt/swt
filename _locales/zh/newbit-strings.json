@@ -14,6 +14,8 @@
   "newbit_传感器类.IR_Sensor|block": "红外传感器|引脚 %pin|  |%value|障碍物",
   "newbit_传感器类.IR_Send|block": "红外发射|引脚 %pin",
   "newbit_传感器类.Ultrasonic|block": "超声波|发射管脚 %Trig|接收管脚 %Echo",
+  "newbit_传感器类.checkCurrentColor|block": "检测颜色是否是 %color",
+  "newbit_传感器类.initColorSensor|block": "颜色传感器初始化",
   "newbit_传感器类.Photosensitive_Sensor|block": "光敏传感器|引脚 %pin|  |%value|光照",
   "newbit_传感器类.Incline_Sensor|block": "倾斜传感器|引脚 %pin|  |%value|倾斜",
   "newbit_传感器类.Flame_Sensor|block": "火焰传感器|引脚 %pin|  |%value|火焰",
