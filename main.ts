@@ -23,7 +23,7 @@ namespace newbit_显示类 {
         Cyan,
         //% blockId="Pinkish" block="品红"
         Pinkish,
-        //% blockId="Green" block="黄色"
+        //% blockId="Yellow" block="黄色"
         Yellow,
 
     }
