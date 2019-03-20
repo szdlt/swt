@@ -1,4 +1,4 @@
-/*  2019.0320.14:53
+/*  2019.0320.15:07
 R
 modified from duncan
 load dependency
@@ -922,7 +922,7 @@ namespace newbit_小车类 {
         //% blockId="Pinkish" block="品红"
         Pinkish,
         //% blockId="Yellow" block="黄色"
-        Yellow,
+        Yellow
 
     }
     export enum enMusic {
@@ -981,7 +981,7 @@ namespace newbit_小车类 {
         S3,
 	S4,
         S5,
-        S6,
+        S6
     }
     export enum CarState {
         //% blockId="Car_Run" block="前行"
