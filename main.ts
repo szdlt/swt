@@ -172,7 +172,7 @@ namespace newbit_传感器类 {
         //% blockId="NoVoice" block="未检测"
         NoGet = 1
     }
-#if 0
+
    export enum Colors {
         //% blockId="Red" block="红色"
         Red = 0x01,
@@ -521,7 +521,7 @@ namespace newbit_传感器类 {
         }		
         return (color == t);
 	}
-    #endif
+  
     //% blockId=newbit_Voice_Sensor block="Voice_Sensor|pin %pin|value %value"
     //% weight=100
     //% blockGap=10
