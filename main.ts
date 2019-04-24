@@ -1,4 +1,4 @@
-/*  2019.0320.19:16
+/*  2019.0424.19:32
 R
 modified from duncan
 load dependency
@@ -7,26 +7,7 @@ load dependency
 //% color="#C814B8" weight=25 icon="\uf1d4"
 namespace newbit_显示类 {
     
-    export enum enColor {
-
-        //% blockId="OFF" block="灭"
-        OFF = 0,
-        //% blockId="Red" block="红色"
-        Red,
-        //% blockId="Green" block="绿色"
-        Green,
-        //% blockId="Blue" block="蓝色"
-        Blue,
-        //% blockId="White" block="白色"
-        White,
-        //% blockId="Cyan" block="青色"
-        Cyan,
-        //% blockId="Pinkish" block="品红"
-        Pinkish,
-        //% blockId="Yellow" block="黄色"
-        Yellow
-
-    }
+   
     export enum enLED1 {
         
         //% blockId="OFF" block="灭"
@@ -79,79 +60,6 @@ namespace newbit_显示类 {
 
     }
 
-    //% blockId=newbit_RGB block="RGB|pin1 %pin1|pin2 %pin2|pin3 %pin3|value1 %value1|value2 %value2|value3 %value3"
-    //% weight=2
-    //% blockGap=8
-    //% color="#C814B8"
-    //% value1.min=0 value1.max=255 value2.min=0 value2.max=255 value3.min=0 value3.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB(pin1: AnalogPin, pin2: AnalogPin, pin3: AnalogPin, value1: number, value2: number, value3: number): void {
-
-        pins.analogWritePin(pin1, value1 * 1024 / 256);
-        pins.analogWritePin(pin2, value2 * 1024 / 256);
-        pins.analogWritePin(pin3, value3 * 1024 / 256);
-
-    }
-    //% blockId=newbit_RGB2 block="RGB|pin1 %pin1|pin2 %pin2|pin3 %pin3|value %value"
-    //% weight=1
-    //% blockGap=8
-    //% color="#C814B8"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB2(pin1: DigitalPin, pin2: DigitalPin, pin3: DigitalPin, value: enColor): void {
-
-        switch (value) {
-            case enColor.OFF: {
-                pins.digitalWritePin(pin1, 0);
-                pins.digitalWritePin(pin2, 0);
-                pins.digitalWritePin(pin3, 0);
-                break;
-            }
-            case enColor.Red: {
-                pins.digitalWritePin(pin1, 1);
-                pins.digitalWritePin(pin2, 0);
-                pins.digitalWritePin(pin3, 0);
-                break;
-            }
-            case enColor.Green: {
-                pins.digitalWritePin(pin1, 0);
-                pins.digitalWritePin(pin2, 1);
-                pins.digitalWritePin(pin3, 0);
-                break;
-            }
-            case enColor.Blue: {
-                pins.digitalWritePin(pin1, 0);
-                pins.digitalWritePin(pin2, 0);
-                pins.digitalWritePin(pin3, 1);
-                break;
-            }
-            case enColor.White: {
-                pins.digitalWritePin(pin1, 1);
-                pins.digitalWritePin(pin2, 1);
-                pins.digitalWritePin(pin3, 1);
-                break;
-            }
-            case enColor.Cyan: {
-                pins.digitalWritePin(pin1, 0);
-                pins.digitalWritePin(pin2, 1);
-                pins.digitalWritePin(pin3, 1);
-                break;
-            }
-            case enColor.Pinkish: {
-                pins.digitalWritePin(pin1, 1);
-                pins.digitalWritePin(pin2, 0);
-                pins.digitalWritePin(pin3, 1);
-                break;
-            }
-            case enColor.Yellow: {
-                pins.digitalWritePin(pin1, 1);
-                pins.digitalWritePin(pin2, 1);
-                pins.digitalWritePin(pin3, 0);
-                break;
-            }
-        }
-
-    }
-   
 }
 /*****************************************************************************************************************************************
  *  传感器类 ***************************************************************************************************************************** 
@@ -689,21 +597,6 @@ namespace newbit_传感器类 {
 //% color="#808080" weight=23 icon="\uf11c"
 namespace newbit_输入类 {
 
-    export enum enRocker {
-        //% blockId="Nostate" block="无"
-        Nostate = 0,
-        //% blockId="Up" block="上"
-        Up,
-        //% blockId="Down" block="下"
-        Down,
-        //% blockId="Left" block="左"
-        Left,
-        //% blockId="Right" block="右"
-        Right,
-        //% blockId="Press" block="按下"
-        Press
-    }
-
     export enum enTouch {
         //% blockId="NoTouch" block="未触摸"
         NoTouch = 0,
@@ -733,50 +626,6 @@ namespace newbit_输入类 {
         }
 
     }
-    //% blockId=newbit_Rocker block="Rocker|VRX %pin1|VRY %pin2|SW %pin3|value %value"
-    //% weight=100
-    //% blockGap=10
-    //% color="#808080"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=6
-    export function Rocker(pin1: AnalogPin, pin2: AnalogPin, pin3: DigitalPin, value: enRocker): boolean {
-
-        pins.setPull(pin3, PinPullMode.PullUp);
-        let x = pins.analogReadPin(pin1);
-        let y = pins.analogReadPin(pin2);
-        let z = pins.digitalReadPin(pin3);
-        let now_state = enRocker.Nostate;
-
-        if (x < 100) // 上
-        {
-
-            now_state = enRocker.Up;
-
-        }
-        else if (x > 700) //
-        {
-
-            now_state = enRocker.Down;
-        }
-        else  // 左右
-        {
-            if (y < 100) //右
-            {
-                now_state = enRocker.Right;
-            }
-            else if (y > 700) //左
-            {
-                now_state = enRocker.Left;
-            }
-        }
-        if (z == 0)
-            now_state = enRocker.Press;
-        if (now_state == value)
-            return true;
-        else
-            return false;
-
-    }
-
     //% blockId=newbit_Button block="Button|pin %pin|value %value"
     //% weight=100
     //% blockGap=10
@@ -903,26 +752,6 @@ namespace newbit_小车类 {
     let initialized = false
     let yahStrip: neopixel.Strip;
 
-    export enum enColor {
-
-        //% blockId="OFF" block="灭"
-        OFF = 0,
-        //% blockId="Red" block="红色"
-        Red,
-        //% blockId="Green" block="绿色"
-        Green,
-        //% blockId="Blue" block="蓝色"
-        Blue,
-        //% blockId="White" block="白色"
-        White,
-        //% blockId="Cyan" block="青色"
-        Cyan,
-        //% blockId="Pinkish" block="品红"
-        Pinkish,
-        //% blockId="Yellow" block="黄色"
-        Yellow
-
-    }
     export enum enMusic {
 
         dadadum = 0,
@@ -1201,94 +1030,6 @@ namespace newbit_小车类 {
         //pins.analogWritePin(AnalogPin.P1, 1023-speed);
 
     }
-
-    /**
-     * *****************************************************************
-     * @param index
-     */
-    //% blockId=newbit_RGB_Car_Big2 block="RGB_Car_Big2|value %value"
-    //% weight=101
-    //% blockGap=10
-    //% color="#C814B8"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB_Car_Big2(value: enColor): void {
-
-        switch (value) {
-            case enColor.OFF: {
-                setPwm(0, 0, 0);
-                setPwm(1, 0, 0);
-                setPwm(2, 0, 0);
-                break;
-            }
-            case enColor.Red: {
-                setPwm(0, 0, 4095);
-                setPwm(1, 0, 0);
-                setPwm(2, 0, 0);
-                break;
-            }
-            case enColor.Green: {
-                setPwm(0, 0, 0);
-                setPwm(1, 0, 4095);
-                setPwm(2, 0, 0);
-                break;
-            }
-            case enColor.Blue: {
-                setPwm(0, 0, 0);
-                setPwm(1, 0, 0);
-                setPwm(2, 0, 4095);
-                break;
-            }
-            case enColor.White: {
-                setPwm(0, 0, 4095);
-                setPwm(1, 0, 4095);
-                setPwm(2, 0, 4095);
-                break;
-            }
-            case enColor.Cyan: {
-                setPwm(0, 0, 0);
-                setPwm(1, 0, 4095);
-                setPwm(2, 0, 4095);
-                break;
-            }
-            case enColor.Pinkish: {
-                setPwm(0, 0, 4095);
-                setPwm(1, 0, 0);
-                setPwm(2, 0, 4095);
-                break;
-            }
-            case enColor.Yellow: {
-                setPwm(0, 0, 4095);
-                setPwm(1, 0, 4095);
-                setPwm(2, 0, 0);
-                break;
-            }
-        }
-    }
-    //% blockId=newbit_RGB_Car_Big block="RGB_Car_Big|value1 %value1|value2 %value2|value3 %value3"
-    //% weight=100
-    //% blockGap=10
-    //% color="#C814B8"
-    //% value1.min=0 value1.max=255 value2.min=0 value2.max=255 value3.min=0 value3.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB_Car_Big(value1: number, value2: number, value3: number): void {
-
-        let R = value1 * 16;
-        let G = value2 * 16;
-        let B = value3 * 16;
-
-        if (R > 4096)
-            R = 4095;
-        if (G > 4096)
-            G = 4095;
-        if (B > 4096)
-            B = 4095;
-
-        setPwm(0, 0, R);
-        setPwm(1, 0, G);
-        setPwm(2, 0, B);
-
-    }
-
     //% blockId=newbit_RGB_Car_Program block="RGB_Car_Program"
     //% weight=99
     //% blockGap=10
