@@ -1,4 +1,4 @@
-/*  2019.0425.14:17
+/*  2019.0424.19:32
 R
 modified from duncan
 load dependency
@@ -8,7 +8,9 @@ load dependency
 namespace newbit_显示类 {
     
     let lhRGBLight: QbitRGBLight.LHQbitRGBLight;
-	function initRGBLight() {
+	//% blockId="initRGBLight" block="initRGBLight before use"
+    //% weight=93
+	export function initRGBLight() {
 		if (!lhRGBLight) {
 			lhRGBLight = QbitRGBLight.create(DigitalPin.P15, 4, QbitRGBPixelMode.RGB);
         }
