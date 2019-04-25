@@ -2,7 +2,13 @@
   "newbit_显示类.LED1|block": "LED灯|引脚 %pin|状态 %value",
   "newbit_显示类.LED2|block": "LED灯|引脚 %pin|亮度 %value",
   "newbit_显示类.BreathLED|block": "呼吸灯|引脚 %pin",
-  
+  "newbit_显示类.setPixelRGB|block":"设置|%lightoffset|颜色为 %rgb",
+  "newbit_显示类.setPixelRGBArgs|block":"设置|%lightoffset|颜色为 %rgb",
+  "newbit_显示类.showLight|block":"显示彩灯",
+  "newbit_显示类.clearLight|block":"关闭彩灯",
+  "newbit_显示类.QbitRunType.STOP|block":"停止",
+  "newbit_显示类.QbitRunType.RUN|block":"运行",
+  "newbit_显示类.setBrightness|block":"设置RGB灯亮度 %brightness",
   "newbit_输入类.TouchPad|block": "触摸开关|引脚 %pin|返回 %value",
   "newbit_输入类.Button|block": "按键|引脚 %pin|返回 %value",
 
@@ -19,14 +25,13 @@
   "newbit_传感器类.Touch_Sensor|block": "触摸传感器|引脚 %pin|  |%value|触摸",
   
   "newbit_音乐类.Buzzer|block": "有源蜂鸣器|引脚 %pin|值 %value",
-
+   
   "newbit_电机类.Fan|block": "风扇|引脚 %pin|速度 %value",
   "newbit_电机类.Servo|block": "舵机|引脚 %pin|角度 %value",
   "newbit_电机类.Vibrator_Open|block": "开始震动",
   "newbit_电机类.Vibrator_Close|block": "停止震动",
   
   "newbit_小车类.Ultrasonic_Car|block": "超声波返回（cm）",
-  "newbit_小车类.RGB_Car_Program|block": "七彩流水灯",
   "newbit_小车类.Music_Car|block": "小车音乐播放|%index",
   "newbit_小车类.Line_Sensor|block": "巡线传感器|位置 %direct|检测到 %value",
   "newbit_小车类.Avoid_Sensor|block": "避障传感器|检测到 %value",
