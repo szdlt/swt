@@ -5,7 +5,8 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "neopixel":   "github:szdlt/pxt-neopixel#v0.6.10",
+        "QbitRGBLight.ts",
+        "sendbuffer.asm",
         "newbit_IR":  "github:lzty634158/yahboom_mbit_IR"
     },
     "files": [
