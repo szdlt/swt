@@ -3,14 +3,14 @@
   "newbit_显示类.LED1|block": "LED灯|引脚 %pin|状态 %value",
   "newbit_显示类.LED2|block": "LED灯|引脚 %pin|亮度 %value",
   "newbit_显示类.BreathLED|block": "呼吸灯|引脚 %pin",
+  
   "newbit_显示类.initRGBLight|block": "初始化RGB",
   "newbit_显示类.setPixelRGB|block":"设置|%lightoffset|颜色为 %rgb",
   "newbit_显示类.setPixelRGBArgs|block":"设置|%lightoffset|颜色为 %rgb",
   "newbit_显示类.showLight|block":"显示彩灯",
   "newbit_显示类.clearLight|block":"关闭彩灯",
-  "newbit_显示类.QbitRunType.STOP|block":"停止",
-  "newbit_显示类.QbitRunType.RUN|block":"运行",
   "newbit_显示类.setBrightness|block":"设置RGB灯亮度 %brightness",
+  
   "newbit_输入类.TouchPad|block": "触摸开关|引脚 %pin|返回 %value",
   "newbit_输入类.Button|block": "按键|引脚 %pin|返回 %value",
 
