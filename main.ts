@@ -1,4 +1,4 @@
-/*  2019.0424.19:32
+/*  2019.0425.15:40
 R
 modified from duncan
 load dependency
@@ -7,52 +7,6 @@ load dependency
 //% color="#C814B8" weight=25 icon="\uf1d4"
 namespace newbit_显示类 {
     
-    let lhRGBLight: QbitRGBLight.LHQbitRGBLight;
-	//% blockId="initRGBLight" block="initRGBLight before use"
-    //% weight=93
-	export function initRGBLight() {
-		if (!lhRGBLight) {
-			lhRGBLight = QbitRGBLight.create(DigitalPin.P15, 4, QbitRGBPixelMode.RGB);
-        }
-        clearLight();
-    }
-	 //% blockId="setBrightness" block="set brightness %brightness"
-    //% weight=92
-	export function setBrightness(brightness: number): void {
-        lhRGBLight.setBrightness(brightness);
-    }
-	/**
-     * Set the color of the colored lights, after finished the setting please perform  the display of colored lights.
-     */
-    //% weight=91 blockId=setPixelRGB block="Set|%lightoffset|color to %rgb"
-	 export function setPixelRGB(lightoffset: Lights, rgb: QbitRGBColors)
-    { 
-        lhRGBLight.setPixelColor(lightoffset, rgb, versionFlag);
-    }
-	 /**
-     * Set RGB Color argument
-     */
-    //% weight=90 blockId=setPixelRGBArgs block="Set|%lightoffset|color to %rgb"
-	 export function setPixelRGBArgs(lightoffset: Lights, rgb: number)
-    {
-        lhRGBLight.setPixelColor(lightoffset, rgb, versionFlag);
-    }
-	/**
-     * Display the colored lights, and set the color of the colored lights to match the use. After setting the color of the colored lights, the color of the lights must be displayed.
-     */
-    //% weight=88 blockId=showLight block="Show light"
-	 export function showLight() {
-        lhRGBLight.show();
-    }
-
-    /**
-     * Clear the color of the colored lights and turn off the lights.
-     */
-    //% weight=86 blockGap=50 blockId=clearLight block="Clear light"
-    export function clearLight() {
-        lhRGBLight.clear();
-    }
-	
     export enum enLED1 {
         
         //% blockId="OFF" block="灭"
@@ -1274,6 +1228,3 @@ namespace newbit_小车类 {
         }
     }
 }
-
-
-
