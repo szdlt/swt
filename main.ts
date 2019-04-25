@@ -12,7 +12,7 @@ namespace newbit_显示类 {
     //% weight=93
     export function initRGBLight() {
         if (!lhRGBLight) {
-            lhRGBLight = QbitRGBLight.create(DigitalPin.P15, 4, QbitRGBPixelMode.RGB);
+            lhRGBLight = QbitRGBLight.create(DigitalPin.P16, 4, QbitRGBPixelMode.RGB);
         }
         clearLight();
     }
