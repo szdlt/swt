@@ -5,13 +5,13 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "QbitRGBLight.ts",
-        "sendbuffer.asm",
         "newbit_IR":  "github:lzty634158/yahboom_mbit_IR"
     },
     "files": [
         "README.md",
         "main.ts",
+        "QbitRGBLight.ts",
+        "sendbuffer.asm",
         "_locales/zh/newbit-strings.json"
     ],
     "testFiles": [
