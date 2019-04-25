@@ -1,4 +1,4 @@
-/*  2019.0425.16:46
+/*  2019.0425.18:05
 R
 modified from duncan
 load dependency
@@ -6,42 +6,40 @@ load dependency
 */
 //% color="#C814B8" weight=25 icon="\uf1d4"
 namespace newbit_显示类 {
-    
+
     let lhRGBLight: QbitRGBLight.LHQbitRGBLight;
-	//% blockId="initRGBLight" block="initRGBLight before use"
+    //% blockId="initRGBLight" block="initRGBLight before use"
     //% weight=93
-	export function initRGBLight() {
-		if (!lhRGBLight) {
-			lhRGBLight = QbitRGBLight.create(DigitalPin.P15, 4, QbitRGBPixelMode.RGB);
+    export function initRGBLight() {
+        if (!lhRGBLight) {
+            lhRGBLight = QbitRGBLight.create(DigitalPin.P15, 4, QbitRGBPixelMode.RGB);
         }
         clearLight();
     }
-	 //% blockId="setBrightness" block="set brightness %brightness"
+    //% blockId="setBrightness" block="set brightness %brightness"
     //% weight=92
-	export function setBrightness(brightness: number): void {
+    export function setBrightness(brightness: number): void {
         lhRGBLight.setBrightness(brightness);
     }
 	/**
      * Set the color of the colored lights, after finished the setting please perform  the display of colored lights.
      */
     //% weight=91 blockId=setPixelRGB block="Set|%lightoffset|color to %rgb"
-	 export function setPixelRGB(lightoffset: Lights, rgb: QbitRGBColors)
-    { 
-        lhRGBLight.setPixelColor(lightoffset, rgb, versionFlag);
+    export function setPixelRGB(lightoffset: Lights, rgb: QbitRGBColors) {
+        lhRGBLight.setPixelColor(lightoffset, rgb, false);
     }
-	 /**
-     * Set RGB Color argument
-     */
+    /**
+    * Set RGB Color argument
+    */
     //% weight=90 blockId=setPixelRGBArgs block="Set|%lightoffset|color to %rgb"
-	 export function setPixelRGBArgs(lightoffset: Lights, rgb: number)
-    {
-        lhRGBLight.setPixelColor(lightoffset, rgb, versionFlag);
+    export function setPixelRGBArgs(lightoffset: Lights, rgb: number) {
+        lhRGBLight.setPixelColor(lightoffset, rgb, false);
     }
 	/**
      * Display the colored lights, and set the color of the colored lights to match the use. After setting the color of the colored lights, the color of the lights must be displayed.
      */
     //% weight=88 blockId=showLight block="Show light"
-	 export function showLight() {
+    export function showLight() {
         lhRGBLight.show();
     }
 
@@ -52,13 +50,13 @@ namespace newbit_显示类 {
     export function clearLight() {
         lhRGBLight.clear();
     }
-	
+
     export enum enLED1 {
-        
+
         //% blockId="OFF" block="灭"
         OFF = 0,
         //% blockId="ON" block="亮"
-        ON =1
+        ON = 1
     }
 
     //% blockId=newbit_LED1 block="LED1|pin %pin|value %value"
@@ -126,51 +124,51 @@ namespace newbit_传感器类 {
         NoGet = 1
     }
 
-   export enum Colors {
+    export enum Colors {
         //% blockId="Red" block="红色"
         Red = 0x01,
         //% blockId="Green" block="绿色"
         Green = 0x02,
         //% blockId="Blue" block="蓝色"
         Blue = 0x03,
-	    //% blockId="White" block="白色"
+        //% blockId="White" block="白色"
         White = 0x04,
-	    //% blockId="Black" block="黑色"
-        Black = 0x05	
-    }	
+        //% blockId="Black" block="黑色"
+        Black = 0x05
+    }
     const APDS9960_I2C_ADDR = 0x39;
     const APDS9960_ID_1 = 0xA8;
     const APDS9960_ID_2 = 0x9C;
     /* APDS-9960 register addresses */
     const APDS9960_ENABLE = 0x80;
-    const APDS9960_ATIME  = 0x81;
-    const APDS9960_WTIME  = 0x83;
-    const APDS9960_AILTL  = 0x84;
-    const APDS9960_AILTH  = 0x85;
-    const APDS9960_AIHTL  = 0x86;
-    const APDS9960_AIHTH  = 0x87;
+    const APDS9960_ATIME = 0x81;
+    const APDS9960_WTIME = 0x83;
+    const APDS9960_AILTL = 0x84;
+    const APDS9960_AILTH = 0x85;
+    const APDS9960_AIHTL = 0x86;
+    const APDS9960_AIHTH = 0x87;
     const APDS9960_PILT = 0x89;
     const APDS9960_PIHT = 0x8B;
     const APDS9960_PERS = 0x8C;
     const APDS9960_CONFIG1 = 0x8D;
-    const APDS9960_PPULSE  = 0x8E;
+    const APDS9960_PPULSE = 0x8E;
     const APDS9960_CONTROL = 0x8F;
     const APDS9960_CONFIG2 = 0x90;
     const APDS9960_ID = 0x92;
-    const APDS9960_STATUS  = 0x93;
-    const APDS9960_CDATAL  = 0x94;
-    const APDS9960_CDATAH  = 0x95;
-    const APDS9960_RDATAL  = 0x96;
-    const APDS9960_RDATAH  = 0x97;
-    const APDS9960_GDATAL  = 0x98;
-    const APDS9960_GDATAH  = 0x99;
-    const APDS9960_BDATAL  = 0x9A;
-    const APDS9960_BDATAH  = 0x9B;
-    const APDS9960_PDATA   = 0x9C;
+    const APDS9960_STATUS = 0x93;
+    const APDS9960_CDATAL = 0x94;
+    const APDS9960_CDATAH = 0x95;
+    const APDS9960_RDATAL = 0x96;
+    const APDS9960_RDATAH = 0x97;
+    const APDS9960_GDATAL = 0x98;
+    const APDS9960_GDATAH = 0x99;
+    const APDS9960_BDATAL = 0x9A;
+    const APDS9960_BDATAH = 0x9B;
+    const APDS9960_PDATA = 0x9C;
     const APDS9960_POFFSET_UR = 0x9D;
     const APDS9960_POFFSET_DL = 0x9E;
     const APDS9960_CONFIG3 = 0x9F;
-	
+
     const LED_DRIVE_100MA = 0;
     const LED_DRIVE_50MA = 1;
     const LED_DRIVE_25MA = 2;
@@ -181,7 +179,7 @@ namespace newbit_传感器类 {
     const AGAIN_4X = 1;
     const AGAIN_16X = 2;
     const AGAIN_64X = 3;
-    
+
     /* Default values */
     const DEFAULT_ATIME = 219;    // 103ms
     const DEFAULT_WTIME = 246;    // 27ms
@@ -206,8 +204,8 @@ namespace newbit_传感器类 {
     const DEFAULT_GIEN = 0;       // Disable gesture interrupts
     const DEFAULT_LDRIVE = LED_DRIVE_100MA;
     const DEFAULT_AGAIN = AGAIN_4X;
-	
-	
+
+
     const OFF = 0;
     const ON = 1;
     const POWER = 0;
@@ -221,25 +219,25 @@ namespace newbit_传感器类 {
 
 
     function i2cwrite(reg: number, value: number) {
-       let buf = pins.createBuffer(2);
-       buf[0] = reg;
-       buf[1] = value;
-       pins.i2cWriteBuffer(APDS9960_I2C_ADDR, buf);
+        let buf = pins.createBuffer(2);
+        buf[0] = reg;
+        buf[1] = value;
+        pins.i2cWriteBuffer(APDS9960_I2C_ADDR, buf);
     }
 
-     function i2cread(reg: number): number {
+    function i2cread(reg: number): number {
         pins.i2cWriteNumber(APDS9960_I2C_ADDR, reg, NumberFormat.UInt8BE);
         let val = pins.i2cReadNumber(APDS9960_I2C_ADDR, NumberFormat.UInt8BE);
         return val;
     }
-	
-   function InitColor(): boolean {
-         let id = i2cread(APDS9960_ID);
+
+    function InitColor(): boolean {
+        let id = i2cread(APDS9960_ID);
         //  serial.writeLine("id:")
         //  serial.writeNumber(id); 
         if (!(id == APDS9960_ID_1 || id == APDS9960_ID_2)) {
             return false;
-         }
+        }
         //  serial.writeLine("set mode:")
         setMode(ALL, OFF);
         i2cwrite(APDS9960_ATIME, DEFAULT_ATIME);
@@ -255,105 +253,97 @@ namespace newbit_传感器类 {
         i2cwrite(APDS9960_PERS, DEFAULT_PERS);
         i2cwrite(APDS9960_CONFIG2, DEFAULT_CONFIG2);
         i2cwrite(APDS9960_CONFIG3, DEFAULT_CONFIG3);
-        return true;  
+        return true;
     }
-	    
-     function setMode(mode: number, enable: number) {
-         let reg_val = getMode();
-            /* Change bit(s) in ENABLE register */
-        enable = enable & 0x01;
-         if (mode >= 0 && mode <= 6)
-         {
-             if (enable > 0)
-             {
-                reg_val |= (1 << mode);
-             }
-             else
-             {
-                //reg_val &= ~(1 << mode);
-                 reg_val &= (0xff-(1 << mode)); 
-             }
-        }
-         else if(mode == ALL)
-         {
-             if (enable > 0)
-             {
-                reg_val = 0x7F;
-             }
-             else
-             {
-                reg_val = 0x00;
-             }
-        }
-        i2cwrite(APDS9960_ENABLE,reg_val);
-    }
-    
-     function getMode(): number {
-            let enable_value = i2cread(APDS9960_ENABLE);
-            return enable_value;
-        }
 
-     function setLEDDrive(drive: number) {
-        let val = i2cread(APDS9960_CONTROL);
-            /* Set bits in register to given value */
-         drive &= 0b00000011;
-         drive = drive << 6;
-         val &= 0b00111111;
-         val |= drive;
-         i2cwrite(APDS9960_CONTROL,val);
+    function setMode(mode: number, enable: number) {
+        let reg_val = getMode();
+        /* Change bit(s) in ENABLE register */
+        enable = enable & 0x01;
+        if (mode >= 0 && mode <= 6) {
+            if (enable > 0) {
+                reg_val |= (1 << mode);
+            }
+            else {
+                //reg_val &= ~(1 << mode);
+                reg_val &= (0xff - (1 << mode));
+            }
+        }
+        else if (mode == ALL) {
+            if (enable > 0) {
+                reg_val = 0x7F;
+            }
+            else {
+                reg_val = 0x00;
+            }
+        }
+        i2cwrite(APDS9960_ENABLE, reg_val);
     }
-    
-     function setLightIntLowThreshold(threshold: number) {
+
+    function getMode(): number {
+        let enable_value = i2cread(APDS9960_ENABLE);
+        return enable_value;
+    }
+
+    function setLEDDrive(drive: number) {
+        let val = i2cread(APDS9960_CONTROL);
+        /* Set bits in register to given value */
+        drive &= 0b00000011;
+        drive = drive << 6;
+        val &= 0b00111111;
+        val |= drive;
+        i2cwrite(APDS9960_CONTROL, val);
+    }
+
+    function setLightIntLowThreshold(threshold: number) {
         let val_low = threshold & 0x00FF;
         let val_high = (threshold & 0xFF00) >> 8;
         i2cwrite(APDS9960_AILTL, val_low);
-        i2cwrite(APDS9960_AILTH,val_high);
+        i2cwrite(APDS9960_AILTH, val_high);
     }
 
-     function setLightIntHighThreshold(threshold: number) {
+    function setLightIntHighThreshold(threshold: number) {
         let val_low = threshold & 0x00FF;
         let val_high = (threshold & 0xFF00) >> 8;
         i2cwrite(APDS9960_AIHTL, val_low);
         i2cwrite(APDS9960_AIHTH, val_high);
     }
 
-	
-	function enableLightSensor(interrupts: boolean) {
+
+    function enableLightSensor(interrupts: boolean) {
         setAmbientLightGain(DEFAULT_AGAIN);
-        if (interrupts)
-        {
+        if (interrupts) {
             setAmbientLightIntEnable(1);
-        }   
-        else
-        {
+        }
+        else {
             setAmbientLightIntEnable(0);
         }
         enablePower();
-        setMode(AMBIENT_LIGHT,1);
+        setMode(AMBIENT_LIGHT, 1);
     }
 
-     function setAmbientLightGain(drive: number) {
+    function setAmbientLightGain(drive: number) {
         let val = i2cread(APDS9960_CONTROL);
-            /* Set bits in register to given value */
+        /* Set bits in register to given value */
         drive &= 0b00000011;
         val &= 0b11111100;
         val |= drive;
-        i2cwrite(APDS9960_CONTROL,val);
+        i2cwrite(APDS9960_CONTROL, val);
     }
 
-     function getAmbientLightGain(): number {
+    function getAmbientLightGain(): number {
         let val = i2cread(APDS9960_CONTROL);
         val &= 0b00000011;
         return val;
     }
 
-     function enablePower() {
-        setMode(POWER,1);
+    function enablePower() {
+        setMode(POWER, 1);
     }
 
-     function setAmbientLightIntEnable(enable: number) {
+    function setAmbientLightIntEnable(enable: number) {
         let val = i2cread(APDS9960_ENABLE);
-            /* Set bits in register to given value */
+        /* Set bits in register to given value */
         enable &= 0b00000001;
         enable = enable << 4;
         val &= 0b11101111;
@@ -361,16 +351,16 @@ namespace newbit_传感器类 {
         i2cwrite(APDS9960_ENABLE, val);
     }
 
-     function readAmbientLight(): number {
+    function readAmbientLight(): number {
         let val_byte = i2cread(APDS9960_CDATAL);
         let val = val_byte;
         val_byte = i2cread(APDS9960_CDATAH);
         val = val + val_byte << 8;
         return val;
     }
-	
-	function readRedLight(): number {
-     
+
+    function readRedLight(): number {
+
         let val_byte = i2cread(APDS9960_RDATAL);
         let val = val_byte;
         val_byte = i2cread(APDS9960_RDATAH);
@@ -378,103 +368,96 @@ namespace newbit_传感器类 {
         return val;
     }
 
-     function readGreenLight(): number {
-        
-           let val_byte = i2cread(APDS9960_GDATAL);
-           let val = val_byte;
-           val_byte = i2cread(APDS9960_GDATAH);
-           val = val + val_byte << 8;
-           return val;
+    function readGreenLight(): number {
+
+        let val_byte = i2cread(APDS9960_GDATAL);
+        let val = val_byte;
+        val_byte = i2cread(APDS9960_GDATAH);
+        val = val + val_byte << 8;
+        return val;
     }
-    
-     function readBlueLight(): number {
-        
-           let val_byte = i2cread(APDS9960_BDATAL);
-           let val = val_byte;
-           val_byte = i2cread(APDS9960_BDATAH);
-           val = val + val_byte << 8;
-           return val;
-       }
+
+    function readBlueLight(): number {
+
+        let val_byte = i2cread(APDS9960_BDATAL);
+        let val = val_byte;
+        val_byte = i2cread(APDS9960_BDATAH);
+        val = val + val_byte << 8;
+        return val;
+    }
     //% blockId=newbit_initColorSensor block="initColorSensor|value %value"
     //% weight=95
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function initColorSensor() {
-           InitColor();
-		   enableLightSensor(false);
-		   control.waitMicros(100);
-	}
+        InitColor();
+        enableLightSensor(false);
+        control.waitMicros(100);
+    }
 
-        /*
-	 *  Color sensor to obtain color value.
-	 */
+    /*
+ *  Color sensor to obtain color value.
+ */
     //% weight=84 blockId=newbit_checkCurrentColor block="checkCurrentColor|color %color" 
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function checkCurrentColor(color: Colors): boolean {
-     //       setBrightness(150);     
-     //       setPixelRGB(Lights.Light1, DlbitRGBColors.White);
-     //       setPixelRGB(Lights.Light2, DlbitRGBColors.White);
-     //       showLight(); 
-		let r = readRedLight();
-		let g = readGreenLight();
-		let b = readBlueLight();
-            let t = Colors.Red;
-    
-		if (r > g)
-		{
-			t = Colors.Red;
-		}	
-		else
-		{
-			t = Colors.Green;
-		}	
+        //       setBrightness(150);     
+        //       setPixelRGB(Lights.Light1, DlbitRGBColors.White);
+        //       setPixelRGB(Lights.Light2, DlbitRGBColors.White);
+        //       showLight(); 
+        let r = readRedLight();
+        let g = readGreenLight();
+        let b = readBlueLight();
+        let t = Colors.Red;
 
-		if (t == Colors.Green && g < b)
-		{
-			if(b - g > 1000)
-			   t = Colors.Blue;
-		}	
-		if (t == Colors.Red && r < b)
-		{
-			t = Colors.Blue;
-         }
-//          serial.writeNumber(r); 
-//          serial.writeLine("->red");
-//          serial.writeNumber(g); 
-//          serial.writeLine("->green"); 
-//          serial.writeNumber(b); 
-//          serial.writeLine("->blue"); 
-	     
-	       if(r > 6800 && g > 8000 && b > 12000)
-	       {
-		       t = Colors.White;
-	       }
-	       else if(r < 800 && g < 1100 && b < 1300)
-		{
-		        t = Colors.Black;
-		 }
-		else if (t == Colors.Blue && b > 2800) {
-               //        serial.writeLine("blue");
-            
-		}
-		else if (t == Colors.Green && g > 1500) {
-                // serial.writeLine("green");
-		}
-		else if (t == Colors.Red && r > 3000) {
-			//serial.writeLine("red");
-		}
-		else
-        {
+        if (r > g) {
+            t = Colors.Red;
+        }
+        else {
+            t = Colors.Green;
+        }
+
+        if (t == Colors.Green && g < b) {
+            if (b - g > 1000)
+                t = Colors.Blue;
+        }
+        if (t == Colors.Red && r < b) {
+            t = Colors.Blue;
+        }
+        //          serial.writeNumber(r); 
+        //          serial.writeLine("->red");
+        //          serial.writeNumber(g); 
+        //          serial.writeLine("->green"); 
+        //          serial.writeNumber(b); 
+        //          serial.writeLine("->blue"); 
+
+        if (r > 6800 && g > 8000 && b > 12000) {
+            t = Colors.White;
+        }
+        else if (r < 800 && g < 1100 && b < 1300) {
+            t = Colors.Black;
+        }
+        else if (t == Colors.Blue && b > 2800) {
+            //        serial.writeLine("blue");
+
+        }
+        else if (t == Colors.Green && g > 1500) {
+            // serial.writeLine("green");
+        }
+        else if (t == Colors.Red && r > 3000) {
+            //serial.writeLine("red");
+        }
+        else {
             //serial.writeLine("none");
             return false;
-        }		
+        }
         return (color == t);
-	}
-  
+    }
+
     //% blockId=newbit_Voice_Sensor block="Voice_Sensor|pin %pin|value %value"
     //% weight=100
     //% blockGap=10
@@ -508,14 +491,14 @@ namespace newbit_传感器类 {
         }
 
     }
-	
+
     //% blockId=newbit_Smog_Sensor block="Smog_Sensor|pin %pin| |%value|烟雾"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Smog_Sensor(pin: DigitalPin, value: enIR): boolean {
-		
+
         pins.setPull(pin, PinPullMode.PullUp);
         if (pins.digitalReadPin(pin) == value) {
             return true;
@@ -525,14 +508,14 @@ namespace newbit_传感器类 {
         }
 
     }
-	
+
     //% blockId=newbit_Touch_Sensor block="Touch_Sensor|pin %pin| |%value|触摸"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Touch_Sensor(pin: DigitalPin, value: enIR): boolean {
-		
+
         pins.setPull(pin, PinPullMode.PullUp);
         if (pins.digitalReadPin(pin) == value) {
             return true;
@@ -548,7 +531,7 @@ namespace newbit_传感器类 {
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Photosensitive_Sensor(pin: DigitalPin, value: enIR): boolean {
-		
+
         pins.setPull(pin, PinPullMode.PullUp);
         if (pins.digitalReadPin(pin) == value) {
             return true;
@@ -558,14 +541,14 @@ namespace newbit_传感器类 {
         }
 
     }
-	
+
     //% blockId=newbit_Flame_Sensor block="Flame_Sensor|pin %pin| |%value|火焰"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Flame_Sensor(pin: DigitalPin, value: enIR): boolean {
-		
+
         pins.setPull(pin, PinPullMode.PullUp);
         if (pins.digitalReadPin(pin) == value) {
             return true;
@@ -575,7 +558,7 @@ namespace newbit_传感器类 {
         }
 
     }
-	
+
     function IR_send_38k() {
         for (let i: number = 0; i < 8; i++) {
             pins.digitalWritePin(DigitalPin.P9, 1);
@@ -609,11 +592,11 @@ namespace newbit_传感器类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function IR_Send(pin: DigitalPin): void {
 
-        
+
         IR_send_38k();
 
     }
-   
+
     //% blockId=newbit_ultrasonic block="Ultrasonic|Trig %Trig|Echo %Echo"
     //% color="#87CEEB"
     //% weight=100
@@ -686,7 +669,7 @@ namespace newbit_输入类 {
             return false;
         }
 
-    }  
+    }
 }
 
 /*****************************************************************************************************************************************
@@ -793,10 +776,7 @@ namespace newbit_小车类 {
     const ALL_LED_OFF_H = 0xFD
 
     const PRESCALE = 0xFE
-
     let initialized = false
-    let yahStrip: neopixel.Strip;
-
     export enum enMusic {
 
         dadadum = 0,
@@ -836,7 +816,7 @@ namespace newbit_小车类 {
         Black = 1
 
     }
-    
+
     export enum enAvoidState {
         //% blockId="OBSTACLE" block="有障碍物"
         OBSTACLE = 0,
@@ -845,13 +825,13 @@ namespace newbit_小车类 {
 
     }
 
-    
+
     export enum enServo {
-        
+
         S1 = 1,
         S2,
         S3,
-	    S4,
+        S4,
         S5,
         S6
     }
@@ -919,8 +899,8 @@ namespace newbit_小车类 {
         if (!initialized) {
             initPCA9685();
         }
-	if(channel < 9 && channel > 5)
-	   channel +=3;
+        if (channel < 9 && channel > 5)
+            channel += 3;
         let buf = pins.createBuffer(5);
         buf[0] = LED0_ON_L + 4 * channel;
         buf[1] = on & 0xff;
@@ -947,10 +927,10 @@ namespace newbit_小车类 {
         setPwm(15, 0, speed);
         setPwm(14, 0, 0);
         //pins.digitalWritePin(DigitalPin.P16, 1);
-       // pins.analogWritePin(AnalogPin.P1, 1023-speed); //速度控制
+        // pins.analogWritePin(AnalogPin.P1, 1023-speed); //速度控制
 
-       // pins.analogWritePin(AnalogPin.P0, speed);//速度控制
-       // pins.digitalWritePin(DigitalPin.P8, 0);
+        // pins.analogWritePin(AnalogPin.P0, speed);//速度控制
+        // pins.digitalWritePin(DigitalPin.P8, 0);
     }
 
     function Car_back(speed: number) {
@@ -1016,11 +996,11 @@ namespace newbit_小车类 {
         //pins.digitalWritePin(DigitalPin.P8, 0);
 
         //pins.digitalWritePin(DigitalPin.P16, 1);
-       // pins.analogWritePin(AnalogPin.P1, 1023 - speed);
+        // pins.analogWritePin(AnalogPin.P1, 1023 - speed);
     }
 
     function Car_stop() {
-       
+
         setPwm(12, 0, 0);
         setPwm(13, 0, 0);
 
@@ -1052,7 +1032,7 @@ namespace newbit_小车类 {
 
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.analogWritePin(AnalogPin.P1, speed);
-    } 
+    }
 
     function Car_spinright(speed: number) {
 
@@ -1075,40 +1055,40 @@ namespace newbit_小车类 {
         //pins.analogWritePin(AnalogPin.P1, 1023-speed);
 
     }
-	//% blockId=newbit_ultrasonic_car block="ultrasonic return distance(cm)"
+    //% blockId=newbit_ultrasonic_car block="ultrasonic return distance(cm)"
     //% color="#006400"
     //% weight=98
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Ultrasonic_Car(): number {
-   let echoPin:DigitalPin = DigitalPin.P15;
-   let trigPin:DigitalPin = DigitalPin.P14;
-   pins.setPull(echoPin, PinPullMode.PullNone);
-   pins.setPull(trigPin, PinPullMode.PullNone);
-		   
-   // send pulse
-   pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(5);
-   pins.digitalWritePin(trigPin, 1);
-   control.waitMicros(10);
-   pins.digitalWritePin(trigPin, 0);
-   control.waitMicros(5);
-   // read pulse
-   let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
-    basic.pause(10);
-    return d / 40;  
-	    	    
-    // send pulse
-    //    pins.setPull(DigitalPin.P14, PinPullMode.PullNone);    
-    //    pins.digitalWritePin(DigitalPin.P14, 0);
-    //     control.waitMicros(2);
-     //   pins.digitalWritePin(DigitalPin.P14, 1);
-     //   control.waitMicros(10);
-     //   pins.digitalWritePin(DigitalPin.P14, 0);
+        let echoPin: DigitalPin = DigitalPin.P15;
+        let trigPin: DigitalPin = DigitalPin.P14;
+        pins.setPull(echoPin, PinPullMode.PullNone);
+        pins.setPull(trigPin, PinPullMode.PullNone);
+
+        // send pulse
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(5);
+        pins.digitalWritePin(trigPin, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(5);
+        // read pulse
+        let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
+        basic.pause(10);
+        return d / 40;
+
+        // send pulse
+        //    pins.setPull(DigitalPin.P14, PinPullMode.PullNone);    
+        //    pins.digitalWritePin(DigitalPin.P14, 0);
+        //     control.waitMicros(2);
+        //   pins.digitalWritePin(DigitalPin.P14, 1);
+        //   control.waitMicros(10);
+        //   pins.digitalWritePin(DigitalPin.P14, 0);
 
         // read pulse
-     //   let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
-     //  return d / 58;
+        //   let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
+        //  return d / 58;
     }
 
     //% blockId=newbit_Music_Car block="Music_Car|%index"
@@ -1167,11 +1147,11 @@ namespace newbit_小车类 {
         switch (value) {
             case enAvoidState.OBSTACLE: {
                 if (pins.analogReadPin(AnalogPin.P3) < 800) {
-                
+
                     temp = true;
                     setPwm(8, 0, 0);
                 }
-                else {                 
+                else {
                     temp = false;
                     setPwm(8, 0, 4095);
                 }
@@ -1274,6 +1254,3 @@ namespace newbit_小车类 {
         }
     }
 }
-
-
-
