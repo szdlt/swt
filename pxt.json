@@ -5,7 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "newbit_IR":  "github:lzty634158/yahboom_mbit_IR"
+        "newbit_IR":  "github:lzty634158/yahboom_mbit_IR",
         "OLED12864_I2C": "github:szdlt/OLED12864_I2C"
     },
     "files": [
