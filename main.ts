@@ -1,5 +1,4 @@
-/*  2019.0426.16:40
-R
+/*  2019.0426.16:50
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -564,10 +563,9 @@ namespace newbit_音乐类 {
     //% color="#D2691E"
     //% value.min=0 value.max=1
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=8
-    export function Buzzer(pin: DigitalPin, value: enBuzzer): void {
-
-        pins.setPull(pin, PinPullMode.PullNone);
-        pins.digitalWritePin(pin, value);
+    export function Buzzer(value: enBuzzer): void {
+        pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
+        pins.digitalWritePin(DigitalPin.P0, value);
 
     }
 
