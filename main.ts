@@ -1,4 +1,4 @@
-/*  2019.0425.18:05
+/*  2019.0426.16:40
 R
 modified from duncan
 load dependency
@@ -51,62 +51,7 @@ namespace newbit_显示类 {
         lhRGBLight.clear();
     }
 
-    export enum enLED1 {
-
-        //% blockId="OFF" block="灭"
-        OFF = 0,
-        //% blockId="ON" block="亮"
-        ON = 1
-    }
-
-    //% blockId=newbit_LED1 block="LED1|pin %pin|value %value"
-    //% weight=5
-    //% blockGap=8
-    //% color="#C814B8"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=1
-    export function LED1(pin: DigitalPin, value: enLED1): void {
-
-        pins.digitalWritePin(pin, value);
-
-    }
-
-    //% blockId=newbit_LED2 block="LED2|pin %pin|value %value"
-    //% weight=4
-    //% blockGap=8
-    //% color="#C814B8"
-    //% value.min=0 value.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=2
-    export function LED2(pin: AnalogPin, value: number): void {
-
-        pins.analogWritePin(pin, value * 1024 / 256);
-
-    }
-
-    //% blockId=newbit_BreathLED block="BreathLED|pin %pin"
-    //% weight=3
-    //% blockGap=8
-    //% color="#C814B8"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=3
-    export function BreathLED(pin: AnalogPin): void {
-
-        for (let i: number = 0; i < 1023; i++) {
-            pins.analogWritePin(pin, i);
-            //basic.pause(1);
-            control.waitMicros(1000);
-        }
-        basic.pause(10);
-        for (let i: number = 1023; i > 0; i--) {
-            pins.analogWritePin(pin, i);
-            //basic.pause(1);
-            control.waitMicros(1000);
-        }
-
-    }
-
 }
-/*****************************************************************************************************************************************
- *  传感器类 ***************************************************************************************************************************** 
- ****************************************************************************************************************************************/
 
 //% color="#87CEEB" weight=24 icon="\uf1b6"
 namespace newbit_传感器类 {
@@ -463,10 +408,10 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Voice_Sensor(pin: DigitalPin, value: enVoice): boolean {
+    export function Voice_Sensor(value: enVoice): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
+        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P3) == value) {
             return true;
         }
         else {
@@ -479,11 +424,11 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Incline_Sensor(pin: DigitalPin, value: enIR): boolean {
+    export function Incline_Sensor(value: enIR): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
+        pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
         //IR_send_38k();
-        if (pins.digitalReadPin(pin) == value) {
+        if (pins.digitalReadPin(DigitalPin.P9) == value) {
             return true;
         }
         else {
@@ -497,10 +442,10 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Smog_Sensor(pin: DigitalPin, value: enIR): boolean {
+    export function Smog_Sensor(value: enIR): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
+        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P3) == value) {
             return true;
         }
         else {
@@ -514,10 +459,10 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Touch_Sensor(pin: DigitalPin, value: enIR): boolean {
+    export function Touch_Sensor(value: enIR): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
+        pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P9) == value) {
             return true;
         }
         else {
@@ -530,10 +475,10 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Photosensitive_Sensor(pin: DigitalPin, value: enIR): boolean {
+    export function Photosensitive_Sensor(value: enIR): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
+        pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P8) == value) {
             return true;
         }
         else {
@@ -547,10 +492,10 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Flame_Sensor(pin: DigitalPin, value: enIR): boolean {
+    export function Flame_Sensor(value: enIR): boolean {
 
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
+        pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P8) == value) {
             return true;
         }
         else {
@@ -597,79 +542,6 @@ namespace newbit_传感器类 {
 
     }
 
-    //% blockId=newbit_ultrasonic block="Ultrasonic|Trig %Trig|Echo %Echo"
-    //% color="#87CEEB"
-    //% weight=100
-    //% blockGap=10
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Ultrasonic(Trig: DigitalPin, Echo: DigitalPin): number {
-
-        // send pulse
-        pins.setPull(Trig, PinPullMode.PullNone);
-        pins.digitalWritePin(Trig, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(Trig, 1);
-        control.waitMicros(10);
-        pins.digitalWritePin(Trig, 0);
-
-        // read pulse
-        let d = pins.pulseIn(Echo, PulseValue.High, 23200);
-        return d / 58;
-    }
-}
-
-/*****************************************************************************************************************************************
- *  输入类 *****************************************************************************************************************************
- ****************************************************************************************************************************************/
-
-//% color="#808080" weight=23 icon="\uf11c"
-namespace newbit_输入类 {
-
-    export enum enTouch {
-        //% blockId="NoTouch" block="未触摸"
-        NoTouch = 0,
-        //% blockId="Touch" block="触摸"
-        Touch = 1
-    }
-    export enum enButton {
-        //% blockId="Press" block="按下"
-        Press = 0,
-        //% blockId="Realse" block="松开"
-        Realse = 1
-    }
-
-    //% blockId=newbit_TouchPad block="TouchPad|pin %pin|value %value"
-    //% weight=100
-    //% blockGap=10
-    //% color="#808080"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
-    export function TouchPad(pin: DigitalPin, value: enTouch): boolean {
-
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
-    //% blockId=newbit_Button block="Button|pin %pin|value %value"
-    //% weight=100
-    //% blockGap=10
-    //% color="#808080"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
-    export function Button(pin: DigitalPin, value: enButton): boolean {
-
-        pins.setPull(pin, PinPullMode.PullUp);
-        if (pins.digitalReadPin(pin) == value) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
 }
 
 /*****************************************************************************************************************************************
@@ -728,31 +600,7 @@ namespace newbit_电机类 {
 
         pins.digitalWritePin(DigitalPin.P12, 0);
 
-    }
-    //% blockId=newbit_Fan block="Fan|pin %pin|speed %value"
-    //% weight=100
-    //% blockGap=10
-    //% color="#0000CD"
-    //% value.min=0 value.max=1023
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function Fan(pin: AnalogPin, value: number): void {
-
-        pins.analogWritePin(pin, value);
-
-    }
-
-    //% blockId=newbit_Servo block="Servo|pin %pin|value %value"
-    //% weight=100
-    //% blockGap=10
-    //% color="#0000CD"
-    //% value.min=0 value.max=180
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function Servo(pin: AnalogPin, value: number): void {
-
-        pins.servoWritePin(pin, value);
-
-    }
-
+    } 
 }
 
 //% color="#006400" weight=20 icon="\uf1b9"
