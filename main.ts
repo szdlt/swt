@@ -1,4 +1,4 @@
-/*  2019.0426.16:50
+/*  2019.0508.19:23
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -576,6 +576,7 @@ namespace newbit_音乐类 {
  ****************************************************************************************************************************************/
 
 //% color="#0000CD" weight=21 icon="\uf185"
+
 namespace newbit_电机类 {
     //% blockId=newbit_Vibrator_Open block="Vibrator_Open"
     //% weight=100
@@ -1099,4 +1100,130 @@ namespace newbit_小车类 {
             case CarState.Car_SpinRight: Car_spinright(speed); break;
         }
     }
+}
+namespace newbit_手机控制类 {
+	       let g_mode = 0
+	//% blockId=newbit_BluetoothServoControl block="BluetoothServoControl|%uartData"
+    //% weight=92
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+	export function BluetoothServoControl(uartData : String): void {
+		   
+			let servo1 = 0
+			let servo2 = 0
+			let servo3 = 0
+			let servo4 = 0
+			let servo6 = 0
+			let servo5 = 0
+			let index  = 0
+		    
+			if (uartData.indexOf("*1-") != -1) {
+				index = uartData.indexOf("*1-");
+				servo1 = parseInt(uartData.substr(3, uartData.length - 3))
+				newbit_小车类.Servo_Car(newbit_小车类.enServo.S1, servo1)
+				} 
+			else if (uartData.indexOf("*2-") != -1) {
+				index = uartData.indexOf("*2-");
+				servo2 = parseInt(uartData.substr(3, uartData.length - 3))
+				newbit_小车类.Servo_Car(newbit_小车类.enServo.S2, servo2)
+				} 
+			else if (uartData.indexOf("*3-") != -1) {
+				index = uartData.indexOf("*3-");
+				servo3 = parseInt(uartData.substr(3, uartData.length - 3))
+				newbit_小车类.Servo_Car(newbit_小车类.enServo.S3, servo3)
+				} 
+			else if (uartData.indexOf("*4-") != -1) {
+				index = uartData.indexOf("*4-");
+				servo4 = parseInt(uartData.substr(3, uartData.length - 3))
+				} 
+			else if (uartData.indexOf("*5-") != -1) {
+				index = uartData.indexOf("*5-");
+				servo5 = parseInt(uartData.substr(3, uartData.length - 3))
+				} 
+			else if (uartData.indexOf("*6-") != -1) {
+				index = uartData.indexOf("*6-");
+				servo6 = parseInt(uartData.substr(3, uartData.length - 3))
+				}
+        
+	}
+	//% blockId=newbit_BluetoothMusic block="BluetoothMusic|%uartData"
+    //% weight=92
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+    export function BluetoothMusic(uartData : String): void {
+				if (uartData == "*C1") {
+						music.ringTone(262)
+					} 
+				else if (uartData == "*C2") {
+						music.ringTone(311)
+					} 
+				else if (uartData == "*C3") {
+						music.ringTone(440)
+					} 
+				else if (uartData == "*C4") {
+						music.ringTone(175)
+					} 
+				else if (uartData == "*C5") {
+						music.ringTone(622)
+					} 
+				else if (uartData == "*C6") {
+						music.ringTone(784)
+					} 
+				else if (uartData == "*C7") {
+						music.ringTone(932)
+					} 
+				else if (uartData == "*C8") {
+						pins.digitalWritePin(DigitalPin.P0, 0)
+					}
+		
+	        }
+	
+	//% blockId=newbit_BluetoothCarControl block="BluetoothCarControl|%uartData"
+    //% weight=92
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+	export	function BluetoothCarControl(uartData : String): void {
+			if (uartData == "*CA") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Run)
+			} else if (uartData == "*CB") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Back)
+			} else if (uartData == "*CC") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_SpinLeft)
+			} else if (uartData == "*CD") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_SpinRight)
+			} else if (uartData == "*CE") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_SpinLeft)
+			} else if (uartData == "*CADD") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_SpinRight)
+			} else if (uartData == "*CSD") {
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+			}
+        }
+    //% blockId=newbit_BluetoothModeSelect block="BluetoothModeSelect|%uartData"
+    //% weight=92
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+	export	function BluetoothModeSelect(uartData : String): void {
+			if (uartData == "*CM0") {
+				basic.showIcon(IconNames.House)
+				g_mode = 1
+			} else if (uartData == "*CM1") {
+				basic.showIcon(IconNames.Angry)
+				g_mode = 2
+			} else if (uartData == "*CM9") {
+				g_mode = 0
+				basic.showLeds(`
+					. . . . .
+					. . . . .
+					. . . . .
+					. . . . .
+					. . . . .
+					`)
+				newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+			}
+		}
 }
