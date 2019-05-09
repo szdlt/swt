@@ -773,7 +773,7 @@ namespace newbit_小车类 {
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-	export	function BluetoothCarControl(uartData : String): void {
+	export	function BluetoothCarControl(uartData : string): void {
 			if (uartData == "*CA") {
 				CarCtrl(CarState.Car_Run)
 			} else if (uartData == "*CB") {
@@ -795,7 +795,7 @@ namespace newbit_小车类 {
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-	export function BluetoothServoControl(uartData : String): void {
+	export function BluetoothServoControl(uartData : string): void {
 		   
 			let servo1 = 0
 			let servo2 = 0
@@ -842,7 +842,7 @@ namespace newbit_小车类 {
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-	export	function BluetoothModeSelect(uartData : String): void {
+	export	function BluetoothModeSelect(uartData : string): void {
 			if (uartData == "*CM0") {
 				basic.showIcon(IconNames.House)
 				g_mode = 1
