@@ -1,4 +1,4 @@
-/*  2019.0509.10:23
+/*  2019.0509.11:06
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -8,14 +8,21 @@ namespace newbit_显示类 {
 
     let lhRGBLight: QbitRGBLight.LHQbitRGBLight;
     //% blockId="initRGBLight" block="initRGBLight before use"
-    //% weight=93
+    //% weight=94
     export function initRGBLight() {
         if (!lhRGBLight) {
             lhRGBLight = QbitRGBLight.create(DigitalPin.P16, 4, QbitRGBPixelMode.RGB);
         }
         clearLight();
     }
-	export function SevenColorLED(uartData : String) {
+	
+    //% blockId=newbit_SevenColorLED block="SevenColorLED|%uartData"
+    //% weight=93
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
+
+    export function SevenColorLED(uartData : String) {
     if (uartData == "*CL01") {
         setPixelRGB(Lights.Light1, QbitRGBColors.Red)
         setPixelRGB(Lights.Light2, QbitRGBColors.Red)
