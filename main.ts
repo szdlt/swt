@@ -1,4 +1,4 @@
-/*  2019.0509.09:49
+/*  2019.0509.10:23
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -15,6 +15,38 @@ namespace newbit_显示类 {
         }
         clearLight();
     }
+	export function SevenColorLED(uartData : String) {
+    if (uartData == "*CL01") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Red)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Red)
+        showLight()
+    } else if (uartData == "*CL02") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Orange)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Orange)
+        showLight()
+    } else if (uartData == "*CL03") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Yellow)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Yellow)
+        showLight()
+    } else if (uartData == "*CL04") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Green)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Green)
+        showLight()
+    } else if (uartData == "*CL05") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Indigo)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Indigo)
+        showLight()
+    } else if (uartData == "*CL06") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Blue)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Blue)
+        showLight()
+    } else if (uartData == "*CL07") {
+        setPixelRGB(Lights.Light1, QbitRGBColors.Violet)
+        setPixelRGB(Lights.Light2, QbitRGBColors.Violet)
+        showLight()
+    }
+}
+
     //% blockId="setBrightness" block="set brightness %brightness"
     //% weight=92
     export function setBrightness(brightness: number): void {
@@ -34,7 +66,7 @@ namespace newbit_显示类 {
     export function setPixelRGBArgs(lightoffset: Lights, rgb: number) {
         lhRGBLight.setPixelColor(lightoffset, rgb, false);
     }
-   /**
+	/**
      * Display the colored lights, and set the color of the colored lights to match the use. After setting the color of the colored lights, the color of the lights must be displayed.
      */
     //% weight=88 blockId=showLight block="Show light"
