@@ -5,6 +5,7 @@
   "newbit_显示类.showLight|block":"显示彩灯",
   "newbit_显示类.clearLight|block":"关闭彩灯",
   "newbit_显示类.setBrightness|block":"设置RGB灯亮度 %brightness",
+  "newbit_显示类.SevenColorLED|block":"APP彩灯设置 %uartData",
   
   "newbit_传感器类.Voice_Sensor|block": "声音传感器|返回 %value",
   "newbit_传感器类.IR_Sensor|block": "红外传感器|%value|障碍物",
