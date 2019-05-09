@@ -22,7 +22,7 @@ namespace newbit_显示类 {
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
 
-    export function SevenColorLED(uartData : String) {
+    export function SevenColorLED(uartData : string) {
     if (uartData == "*CL01") {
         setPixelRGB(Lights.Light1, QbitRGBColors.Red)
         setPixelRGB(Lights.Light2, QbitRGBColors.Red)
