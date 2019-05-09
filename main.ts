@@ -607,7 +607,6 @@ namespace newbit_传感器类 {
         else if (checkCurrentColor(3) == true)
             corlor = 3;
         else corlor = 0;
-        CSB = "*SW23.5#*SD27.1#*SC0#*"
         CSB = "*SW" + wendu + "#*SD" + distance + "#SC*" + corlor + "#"
         bluetooth.uartWriteString(CSB)
         CSB = "*SL" + Light + "#*SF" + Flame + "#ST*" + Touch + "#"
