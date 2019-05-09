@@ -565,7 +565,6 @@ namespace newbit_传感器类 {
         else {
             return false;
         }
-
     }
 
     //% blockId=newbit_IR_Send block="IR_Send|pin %pin"
@@ -574,10 +573,7 @@ namespace newbit_传感器类 {
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function IR_Send(pin: DigitalPin): void {
-
-
         IR_send_38k();
-
     }
 
 }
@@ -589,7 +585,6 @@ namespace newbit_传感器类 {
 //% color="#D2691E" weight=22 icon="\uf001"
 namespace newbit_音乐类 {
     export enum enBuzzer {
-
         //% blockId="NoBeep" block="不响"
         NoBeep = 0,
         //% blockId="Beep" block="响"
@@ -600,31 +595,31 @@ namespace newbit_音乐类 {
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function BluetoothMusic(uartData : String): void {
-				if (uartData == "*C1") {
-					    music.ringTone(262)
-					} 
-				else if (uartData == "*C2") {
-						music.ringTone(311)
-					} 
-				else if (uartData == "*C3") {
-						music.ringTone(440)
-					} 
-				else if (uartData == "*C4") {
-						music.ringTone(175)
-					} 
-				else if (uartData == "*C5") {
-						music.ringTone(622)
-					} 
-				else if (uartData == "*C6") {
-						music.ringTone(784)
-					} 
-				else if (uartData == "*C7") {
-						music.ringTone(932)
-					} 
-				else if (uartData == "*C8") {
-						pins.digitalWritePin(DigitalPin.P0, 0)
-					}
+    export function BluetoothMusic(uartData : string): void {
+		if (uartData == "*C1") {
+			    music.ringTone(262)
+			} 
+		else if (uartData == "*C2") {
+			    music.ringTone(311)
+			} 
+		else if (uartData == "*C3") {
+			    music.ringTone(440)
+			} 
+		else if (uartData == "*C4") {
+			    music.ringTone(175)
+			} 
+		else if (uartData == "*C5") {
+			    music.ringTone(622)
+			} 
+		else if (uartData == "*C6") {
+			    music.ringTone(784)
+			} 
+		else if (uartData == "*C7") {
+			    music.ringTone(932)
+			} 
+		else if (uartData == "*C8") {
+			    pins.digitalWritePin(DigitalPin.P0, 0)
+			}
 		
 	        }
     //% blockId=newbit_Buzzer block="Buzzer|pin %pin|value %value"
@@ -636,7 +631,6 @@ namespace newbit_音乐类 {
     export function Buzzer(value: enBuzzer): void {
         pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
         pins.digitalWritePin(DigitalPin.P0, value);
-
     }
 
 }
@@ -666,9 +660,7 @@ namespace newbit_电机类 {
     //% value.min=0 value.max=1023
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Vibrator_Close(): void {
-
         pins.digitalWritePin(DigitalPin.P12, 0);
-
     } 
 }
 
@@ -695,7 +687,6 @@ namespace newbit_小车类 {
     const PRESCALE = 0xFE
     let initialized = false
     export enum enMusic {
-
         dadadum = 0,
         entertainer,
         prelude,
@@ -704,7 +695,6 @@ namespace newbit_小车类 {
         ringtone,
         funk,
         blues,
-
         birthday,
         wedding,
         funereal,
@@ -719,32 +709,24 @@ namespace newbit_小车类 {
         power_down
     }
     export enum enPos {
-
         //% blockId="LeftState" block="左边状态"
         LeftState = 0,
         //% blockId="RightState" block="右边状态"
         RightState = 1
     }
-
     export enum enLineState {
         //% blockId="White" block="白线"
         White = 0,
         //% blockId="Black" block="黑线"
         Black = 1
-
     }
-
     export enum enAvoidState {
         //% blockId="OBSTACLE" block="有障碍物"
         OBSTACLE = 0,
         //% blockId="NOOBSTACLE" block="无障碍物"
         NOOBSTACLE = 1
-
     }
-
-
     export enum enServo {
-
         S1 = 1,
         S2,
         S3,
@@ -790,13 +772,12 @@ namespace newbit_小车类 {
 			   CarCtrl(CarState.Car_Stop)
 			}
         }
-	//% blockId=newbit_BluetoothServoControl block="BluetoothServoControl|%uartData"
+    //% blockId=newbit_BluetoothServoControl block="BluetoothServoControl|%uartData"
     //% weight=92
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
 	export function BluetoothServoControl(uartData : string): void {
-		   
 			let servo1 = 0
 			let servo2 = 0
 			let servo3 = 0
@@ -804,7 +785,6 @@ namespace newbit_小车类 {
 			let servo6 = 0
 			let servo5 = 0
 			let index  = 0
-		    
 			if (uartData.indexOf("*1-") != -1) {
 				index = uartData.indexOf("*1-");
 				servo1 = parseInt(uartData.substr(3, uartData.length - 3))
@@ -837,7 +817,7 @@ namespace newbit_小车类 {
 				}
         
 	}
-	//% blockId=newbit_BluetoothModeSelect block="BluetoothModeSelect|%uartData"
+    //% blockId=newbit_BluetoothModeSelect block="BluetoothModeSelect|%uartData"
     //% weight=92
     //% blockGap=10
     //% color="#006400"
@@ -861,32 +841,27 @@ namespace newbit_小车类 {
 				CarCtrl(CarState.Car_Stop)
 			}
 		}
-	
     function i2cwrite_(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
         buf[0] = reg
         buf[1] = value
         pins.i2cWriteBuffer(addr, buf)
     }
-
     function i2ccmd(addr: number, value: number) {
         let buf = pins.createBuffer(1)
         buf[0] = value
         pins.i2cWriteBuffer(addr, buf)
     }
-
     function i2cread(addr: number, reg: number) {
         pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
         let val = pins.i2cReadNumber(addr, NumberFormat.UInt8BE);
         return val;
     }
-
     function initPCA9685(): void {
         i2cwrite_(PCA9685_ADD, MODE1, 0x00)
         setFreq(50);
         initialized = true
     }
-
     function setFreq(freq: number): void {
         // Constrain the frequency
         let prescaleval = 25000000;
@@ -902,7 +877,6 @@ namespace newbit_小车类 {
         control.waitMicros(5000);
         i2cwrite_(PCA9685_ADD, MODE1, oldmode | 0xa1);
     }
-
     function setPwm(channel: number, on: number, off: number): void {
         if (channel < 0 || channel > 15)
             return;
@@ -919,10 +893,7 @@ namespace newbit_小车类 {
         buf[4] = (off >> 8) & 0xff;
         pins.i2cWriteBuffer(PCA9685_ADD, buf);
     }
-
-
     function Car_run(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -930,10 +901,8 @@ namespace newbit_小车类 {
         if (speed <= 350) {
             speed = 350
         }
-
         setPwm(12, 0, speed);
         setPwm(13, 0, 0);
-
         setPwm(15, 0, speed);
         setPwm(14, 0, 0);
         //pins.digitalWritePin(DigitalPin.P16, 1);
@@ -942,9 +911,7 @@ namespace newbit_小车类 {
         // pins.analogWritePin(AnalogPin.P0, speed);//速度控制
         // pins.digitalWritePin(DigitalPin.P8, 0);
     }
-
     function Car_back(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -952,22 +919,16 @@ namespace newbit_小车类 {
         if (speed <= 350 && speed != 0) {
             speed = 350
         }
-
         setPwm(12, 0, 0);
         setPwm(13, 0, speed);
-
         setPwm(15, 0, 0);
         setPwm(14, 0, speed);
-
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.analogWritePin(AnalogPin.P1, speed); //速度控制
-
         //pins.analogWritePin(AnalogPin.P0, 1023 - speed);//速度控制
         //pins.digitalWritePin(DigitalPin.P8, 1);
     }
-
     function Car_left(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -977,19 +938,14 @@ namespace newbit_小车类 {
         }
         setPwm(12, 0, 0);
         setPwm(13, 0, 0);
-
         setPwm(15, 0, speed);
         setPwm(14, 0, 0);
-
         //pins.analogWritePin(AnalogPin.P0, speed);
         //pins.digitalWritePin(DigitalPin.P8, 0);
-
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.digitalWritePin(DigitalPin.P1, 0);
     }
-
     function Car_right(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -1004,16 +960,12 @@ namespace newbit_小车类 {
         setPwm(14, 0, 0);
         //pins.digitalWritePin(DigitalPin.P0, 0);
         //pins.digitalWritePin(DigitalPin.P8, 0);
-
         //pins.digitalWritePin(DigitalPin.P16, 1);
         // pins.analogWritePin(AnalogPin.P1, 1023 - speed);
     }
-
     function Car_stop() {
-
         setPwm(12, 0, 0);
         setPwm(13, 0, 0);
-
         setPwm(15, 0, 0);
         setPwm(14, 0, 0);
         //pins.digitalWritePin(DigitalPin.P0, 0);
@@ -1021,9 +973,7 @@ namespace newbit_小车类 {
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.digitalWritePin(DigitalPin.P1, 0);
     }
-
     function Car_spinleft(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -1033,19 +983,14 @@ namespace newbit_小车类 {
         }
         setPwm(12, 0, 0);
         setPwm(13, 0, speed);
-
         setPwm(15, 0, speed);
         setPwm(14, 0, 0);
-
         //pins.analogWritePin(AnalogPin.P0, speed);
         //pins.digitalWritePin(DigitalPin.P8, 0);
-
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.analogWritePin(AnalogPin.P1, speed);
     }
-
     function Car_spinright(speed: number) {
-
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
             speed = 4095
@@ -1055,15 +1000,12 @@ namespace newbit_小车类 {
         }
         setPwm(12, 0, speed);
         setPwm(13, 0, 0);
-
         setPwm(15, 0, 0);
         setPwm(14, 0, speed);
         //pins.analogWritePin(AnalogPin.P0, 1023-speed);
         //pins.digitalWritePin(DigitalPin.P8, 1);
-
         //pins.digitalWritePin(DigitalPin.P16, 1);
         //pins.analogWritePin(AnalogPin.P1, 1023-speed);
-
     }
     //% blockId=newbit_ultrasonic_car block="ultrasonic return distance(cm)"
     //% color="#006400"
@@ -1075,7 +1017,6 @@ namespace newbit_小车类 {
         let trigPin: DigitalPin = DigitalPin.P14;
         pins.setPull(echoPin, PinPullMode.PullNone);
         pins.setPull(trigPin, PinPullMode.PullNone);
-
         // send pulse
         pins.digitalWritePin(trigPin, 0);
         control.waitMicros(5);
@@ -1087,7 +1028,6 @@ namespace newbit_小车类 {
         let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
         basic.pause(10);
         return d / 40;
-
         // send pulse
         //    pins.setPull(DigitalPin.P14, PinPullMode.PullNone);    
         //    pins.digitalWritePin(DigitalPin.P14, 0);
@@ -1100,7 +1040,6 @@ namespace newbit_小车类 {
         //   let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
         //  return d / 58;
     }
-
     //% blockId=newbit_Music_Car block="Music_Car|%index"
     //% weight=97
     //% blockGap=10
@@ -1137,27 +1076,22 @@ namespace newbit_小车类 {
     //% num.min=1 num.max=3 value.min=0 value.max=180
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Servo_Car(num: enServo, value: number): void {
-
         // 50hz: 20,000 us
         let us = (value * 1800 / 180 + 600); // 0.6 ~ 2.4
         let pwm = us * 4096 / 20000;
         setPwm(num + 2, 0, pwm);
-
     }
-
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Avoid_Sensor(value: enAvoidState): boolean {
-
         let temp: boolean = false;
         pins.digitalWritePin(DigitalPin.P9, 0);
         switch (value) {
             case enAvoidState.OBSTACLE: {
                 if (pins.analogReadPin(AnalogPin.P3) < 800) {
-
                     temp = true;
                     setPwm(8, 0, 0);
                 }
@@ -1167,10 +1101,8 @@ namespace newbit_小车类 {
                 }
                 break;
             }
-
             case enAvoidState.NOOBSTACLE: {
                 if (pins.analogReadPin(AnalogPin.P3) > 800) {
-
                     temp = true;
                     setPwm(8, 0, 4095);
                 }
@@ -1183,7 +1115,6 @@ namespace newbit_小车类 {
         }
         pins.digitalWritePin(DigitalPin.P9, 1);
         return temp;
-
     }
     //% blockId=newbit_Line_Sensor block="Line_Sensor|direct %direct|value %value"
     //% weight=94
@@ -1191,9 +1122,7 @@ namespace newbit_小车类 {
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Line_Sensor(direct: enPos, value: enLineState): boolean {
-
         let temp: boolean = false;
-
         switch (direct) {
             case enPos.LeftState: {
                 if (pins.analogReadPin(AnalogPin.P2) < 500) {
@@ -1210,7 +1139,6 @@ namespace newbit_小车类 {
                 }
                 break;
             }
-
             case enPos.RightState: {
                 if (pins.analogReadPin(AnalogPin.P1) < 500) {
                     if (value == enLineState.White) {
@@ -1228,7 +1156,6 @@ namespace newbit_小车类 {
             }
         }
         return temp;
-
     }
     //% blockId=newbit_CarCtrl block="CarCtrl|%index"
     //% weight=93
