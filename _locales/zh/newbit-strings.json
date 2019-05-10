@@ -26,7 +26,7 @@
   "newbit_小车类.Ultrasonic_Car|block": "超声波返回（cm）",
   "newbit_小车类.Music_Car|block": "小车音乐播放|%index",
   "newbit_小车类.Line_Sensor|block": "巡线传感器|位置 %direct|检测到 %value",
-  "newbit_小车类.Avoid_Sensor|block": "避障传感器|检测到 %value",
+  "newbit_小车类.Avoid_Sensor|block": "红外避障传感器|检测到 %value",
   "newbit_小车类.Servo_Car|block": "小车舵机|编号 %num|角度 %value",
   "newbit_小车类.CarCtrl|block": "小车控制|%index",
   "newbit_小车类.CarCtrlSpeed|block": "小车控制|%index|速度 %speed",
