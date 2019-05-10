@@ -575,48 +575,6 @@ namespace newbit_传感器类 {
     export function IR_Send(pin: DigitalPin): void {
         IR_send_38k();
     }
-
-    //% blockId=newbit_SensorUpdateMessage block="SensorUpdateMessage"
-    //% blockGap=10
-    //% speed.min=0 speed.max=255
-    //% color="#006400"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function SensorUpdateMessage(): void {
-        let distance = 0.0
-        let wendu = 0.0
-        let corlor = 0
-        let CSB = ""
-        let Light:   boolean = false
-        let Smog:    boolean = false
-        let Flame:   boolean = false
-        let Touch:   boolean = false
-        let Incline: boolean = false
-        let Voice: boolean   = false
-        distance = newbit_小车类.Ultrasonic_Car()
-        wendu = input.temperature()
-        Light = Photosensitive_Sensor(0)
-        Smog = Smog_Sensor(0)
-        Flame = Flame_Sensor(0)
-        Touch = Touch_Sensor(0)
-        Incline = Incline_Sensor(0)
-        Voice = Voice_Sensor(0)
-        if (checkCurrentColor(1) == true)
-            corlor = 1;
-        else if (checkCurrentColor(2) == true)
-            corlor = 2;
-        else if (checkCurrentColor(3) == true)
-            corlor = 3;
-        else corlor = 0;
-        CSB = "*SW" + wendu + "#*SD" + distance + "#SC*" + corlor + "#"
-        bluetooth.uartWriteString(CSB)
-        CSB = "*SL" + Light + "#*SF" + Flame + "#ST*" + Touch + "#"
-        bluetooth.uartWriteString(CSB)
-        CSB = "*SI" + Incline + "#*SV" + Voice + "#SS*" + Smog + "#"
-        bluetooth.uartWriteString(CSB)
-    }
-
-
-
 }
 
 /*****************************************************************************************************************************************
