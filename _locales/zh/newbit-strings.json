@@ -17,7 +17,6 @@
   "newbit_传感器类.Flame_Sensor|block": "火焰传感器|%value|火焰",
   "newbit_传感器类.Smog_Sensor|block": "烟雾传感器|%value|烟雾",
   "newbit_传感器类.Touch_Sensor|block": "触摸传感器|%value|触摸",
-  "newbit_传感器类.SensorUpdateMessage|block": "上传数据到APP",
   
   "newbit_音乐类.Buzzer|block": "有源蜂鸣器|值 %value",
   "newbit_音乐类.BluetoothMusic|block": "APP音乐播放%uartData",
