@@ -807,9 +807,9 @@ namespace newbit_小车类 {
         } else if (uartData == "*CD") {
             CarCtrl(CarState.Car_SpinRight)
         } else if (uartData == "*CE") {
-            CarCtrl(CarState.Car_SpinLeft)
+             CarCtrl(CarState.Car_Stop)
         } else if (uartData == "*CADD") {
-            CarCtrl(CarState.Car_SpinRight)
+            CarCtrl(CarState.Car_Stop)
         } else if (uartData == "*CSD") {
             CarCtrl(CarState.Car_Stop)
         }
