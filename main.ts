@@ -555,7 +555,7 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function IR_Sensor(pin: DigitalPin, value: enIR): boolean {
+    function IR_Sensor(pin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(pin, PinPullMode.PullUp);
         //IR_send_38k();
@@ -572,8 +572,8 @@ namespace newbit_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function IR_Send(pin: DigitalPin): void {
-        IR_send_38k();
+    function IR_Send(pin: DigitalPin): void {
+             IR_send_38k();
     }
 }
 
