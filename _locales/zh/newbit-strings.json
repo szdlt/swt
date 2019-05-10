@@ -8,8 +8,6 @@
   "newbit_显示类.SevenColorLED|block":"APP彩灯设置 %uartData",
   
   "newbit_传感器类.Voice_Sensor|block": "声音传感器|返回 %value",
-  "newbit_传感器类.IR_Sensor|block": "红外传感器|%value|障碍物",
-  "newbit_传感器类.IR_Send|block": "红外遥控器",
   "newbit_传感器类.checkCurrentColor|block": "检测颜色是否是 %color",
   "newbit_传感器类.initColorSensor|block": "颜色传感器初始化",
   "newbit_传感器类.Photosensitive_Sensor|block": "光敏传感器|  |%value|光照",
@@ -26,7 +24,7 @@
   "newbit_小车类.Ultrasonic_Car|block": "超声波返回（cm）",
   "newbit_小车类.Music_Car|block": "小车音乐播放|%index",
   "newbit_小车类.Line_Sensor|block": "巡线传感器|位置 %direct|检测到 %value",
-  "newbit_小车类.Avoid_Sensor|block": "红外避障传感器|检测到 %value",
+  "newbit_小车类.Avoid_Sensor|block": "红外避障传感器|检测到 %value|障碍物",
   "newbit_小车类.Servo_Car|block": "小车舵机|编号 %num|角度 %value",
   "newbit_小车类.CarCtrl|block": "小车控制|%index",
   "newbit_小车类.CarCtrlSpeed|block": "小车控制|%index|速度 %speed",
