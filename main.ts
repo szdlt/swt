@@ -103,7 +103,7 @@ namespace newbit_传感器类 {
     export enum enIR {
         //% blockId="Get" block="检测到"
         Get = 0,
-        //% blockId="NoVoice" block="未检测"
+        //% blockId="NoGet" block="未检测"
         NoGet = 1
     }
 
