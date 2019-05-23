@@ -93,7 +93,7 @@ namespace QbitRGBLight {
                 switch (rgb)
                 {
                     case QbitRGBColors.Red:
-                        tureRgb = 0x00FF00;
+                        tureRgb = 0xFF0000;
                         break;    
     
                     case QbitRGBColors.Orange:
@@ -105,7 +105,7 @@ namespace QbitRGBLight {
                         break;    
                         
                     case QbitRGBColors.Green:
-                        tureRgb = 0xFF0000;    
+                        tureRgb = 0x00FF00;    
                         break;    
     
                     case QbitRGBColors.Blue:
