@@ -3,14 +3,14 @@
  */
 
 enum QbitRGBColors {
-    //% block=red
-    Green = 1,
+    //% block=red.
+    Red = 1,
     //% block=orange
     Orange = 2,
     //% block=yellow
     Yellow = 3,
     //% block=green
-    Red = 4,
+    Green = 4,
     //% block=blue
     Blue = 5,
     //% block=indigo
@@ -93,7 +93,7 @@ namespace QbitRGBLight {
                 switch (rgb)
                 {
                     case QbitRGBColors.Red:
-                        tureRgb = 0xFF0000;
+                        tureRgb = 0x00FF00;
                         break;    
     
                     case QbitRGBColors.Orange:
@@ -105,7 +105,7 @@ namespace QbitRGBLight {
                         break;    
                         
                     case QbitRGBColors.Green:
-                        tureRgb = 0x00FF00;    
+                        tureRgb = 0xFF0000;    
                         break;    
     
                     case QbitRGBColors.Blue:
@@ -190,11 +190,11 @@ namespace QbitRGBLight {
 
         private setBufferRGB(offset: number, red: number, green: number, blue: number): void {
             if (this._mode === QbitRGBPixelMode.RGB_RGB) {
-                this.buf[offset + 0] = red;
-                this.buf[offset + 1] = green;
+                this.buf[offset + 1] = red;
+                this.buf[offset + 0] = green;
             } else {
-                this.buf[offset + 0] = red;
-                this.buf[offset + 1] = green;
+                this.buf[offset + 1] = red;
+                this.buf[offset + 0] = green;
             }
             this.buf[offset + 2] = blue;
         }
