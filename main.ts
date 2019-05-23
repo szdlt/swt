@@ -102,9 +102,9 @@ namespace newbit_传感器类 {
     }
     export enum enIR {
         //% blockId="NoGet" block="未检测到"
-          NoGet = 0,
+          Get = 0,
         //% blockId="Get" block="检测到""
-          Get = 1
+          NoGet = 1
     }
 
     export enum Colors {
