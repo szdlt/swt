@@ -4,13 +4,13 @@
 
 enum QbitRGBColors {
     //% block=red
-    Red = 1,
+    Green = 1,
     //% block=orange
     Orange = 2,
     //% block=yellow
     Yellow = 3,
     //% block=green
-    Green = 4,
+    Red = 4,
     //% block=blue
     Blue = 5,
     //% block=indigo
