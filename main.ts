@@ -685,7 +685,8 @@ namespace newbit_小车类 {
 
     const PRESCALE = 0xFE
     let initialized = false
-    let g_mode = 1
+    export let g_mode = 0
+    
     export enum enMusic {
         dadadum = 0,
         entertainer,
