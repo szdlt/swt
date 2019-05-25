@@ -685,7 +685,7 @@ namespace newbit_小车类 {
 
     const PRESCALE = 0xFE
     let initialized = false
-    export let g_mode = 0
+    let g_mode = 0
     
     export enum enMusic {
         dadadum = 0,
@@ -735,6 +735,15 @@ namespace newbit_小车类 {
         S5,
         S6
     }
+    export enum CarRunState {
+       //% blockId="Car_Normal" block="正常"
+        Car_Normal = 0,
+	//% blockId="Car_XunJi" block="寻迹"
+        Car_XunJi =1, 
+        //% blockId="Car_BiZhang" block="避障"  
+        Car_BiZhang = 2
+       
+    }	
     export enum CarState {
         //% blockId="Car_Run" block="前行"
         Car_Run = 1,
@@ -823,23 +832,16 @@ namespace newbit_小车类 {
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function BluetoothModeSelect(uartData: string): void {
+    export function BluetoothModeSelect(uartData: string): number {
         if (uartData == "*CM0") {
-            basic.showIcon(IconNames.House)
             g_mode = 1
+	    return CarRunState.Car_BiZhang
         } else if (uartData == "*CM1") {
-            basic.showIcon(IconNames.Angry)
             g_mode = 2
+	    return CarRunState.Car_XunJi
         } else if (uartData == "*CM9") {
             g_mode = 0
-            basic.showLeds(`
-					. . . . .
-					. . . . .
-					. . . . .
-					. . . . .
-					. . . . .
-					`)
-            CarCtrl(CarState.Car_Stop)
+	    return CarRunState.Car_Normal
         }
     }
     function i2cwrite_(addr: number, reg: number, value: number) {
