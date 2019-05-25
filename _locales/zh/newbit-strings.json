@@ -29,7 +29,7 @@
   "newbit_小车类.CarCtrl|block": "小车控制|%index",
   "newbit_小车类.CarCtrlSpeed|block": "小车控制|%index|速度 %speed",
   "newbit_小车类.BluetoothCarControl|block": "APP小车运动控制%uartData",
-  "newbit_小车类.BluetoothModeSelect|block": "APP小车模式选择%uartData|%CarRunState",
+  "newbit_小车类.BluetoothModeSelect|block": "APP小车模式选择%uartData返回类型",
   "newbit_小车类.BluetoothServoControl|block": "APP舵机控制%uartData"
   
 }
