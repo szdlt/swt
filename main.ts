@@ -835,14 +835,18 @@ namespace newbit_小车类 {
     export function BluetoothModeSelect(uartData: string): number {
         if (uartData == "*CM0") {
             g_mode = 1
-	    return CarRunState.Car_BiZhang
+	    return CarRunState.Car_XunJi
         } else if (uartData == "*CM1") {
             g_mode = 2
-	    return CarRunState.Car_XunJi
+	    return CarRunState.Car_BiZhang
         } else if (uartData == "*CM9") {
             g_mode = 0
 	    return CarRunState.Car_Normal
         }
+	  else{
+	      g_mode = 0
+	      return CarRunState.Car_Normal
+	  }
     }
     function i2cwrite_(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
