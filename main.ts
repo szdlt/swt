@@ -105,7 +105,12 @@ namespace newbit_传感器类 {
         //% blockId="NoVoice" block="未检测到"
         NoGet = 1
     }
-
+     export enum enOK {
+        //% blockId="NotOK" block="异常"
+        NotOK = 0,
+        //% blockId="OK" block="正常"
+        OK = 1
+    }
     export enum Colors {
         //% blockId="Red" block="红色"
         Red = 0x01,
@@ -491,12 +496,12 @@ namespace newbit_传感器类 {
         }
 
     }
-    //% blockId=newbit_Humidity_Sensor block="Humidity_Sensor|%value|土壤湿度正常"
+    //% blockId=newbit_Humidity_Sensor block="Humidity_Sensor|土壤湿度|%value"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Humidity_Sensor(value: enIR): boolean {
+    export function Humidity_Sensor(value: enOK): boolean {
 
         pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
         if (pins.digitalReadPin(DigitalPin.P3) == value) {
