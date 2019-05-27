@@ -19,7 +19,6 @@ namespace newbit_显示类 {
     //% blockId=newbit_SevenColorLED block="SevenColorLED|%uartData"
     //% weight=93
     //% blockGap=10
-    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
 
     export function SevenColorLED(uartData: string) {
@@ -611,7 +610,7 @@ namespace newbit_音乐类 {
     //% blockId=newbit_BluetoothMusic block="BluetoothMusic|%uartData"
     //% weight=92
     //% blockGap=10
-    //% color="#006400"
+    //% color="#D2691E"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function BluetoothMusic(uartData: string): void {
         if (uartData == "*C1") {
