@@ -1,4 +1,4 @@
-/*  2019.0509.11:06
+/*  2019.0527.14:37
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -368,10 +368,11 @@ namespace newbit_传感器类 {
         val = val + val_byte << 8;
         return val;
     }
+	 
     //% blockId=newbit_initColorSensor block="initColorSensor|value %value"
     //% weight=95
     //% blockGap=10
-    //% color="#006400"
+    //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function initColorSensor() {
         InitColor();
@@ -441,7 +442,7 @@ namespace newbit_传感器类 {
         return (color == t);
     }
 
-    //% blockId=newbit_Voice_Sensor block="Voice_Sensor|pin %pin|value %value|声音"
+    //% blockId=newbit_Voice_Sensor block="Voice_Sensor|value %value|声音"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -457,7 +458,7 @@ namespace newbit_传感器类 {
         }
 
     }
-    //% blockId=newbit_Incline_Sensor block="Incline_Sensor|pin %pin| |%value|倾斜"
+    //% blockId=newbit_Incline_Sensor block="Incline_Sensor|%value|倾斜"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -475,7 +476,7 @@ namespace newbit_传感器类 {
 
     }
 
-    //% blockId=newbit_Smog_Sensor block="Smog_Sensor|pin %pin| |%value|烟雾"
+    //% blockId=newbit_Smog_Sensor block="Smog_Sensor|%value|烟雾"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -491,8 +492,26 @@ namespace newbit_传感器类 {
         }
 
     }
+    //% blockId=newbit_Humidity_Sensor block="Humidity_Sensor|%value|土壤湿度正常"
+    //% weight=100
+    //% blockGap=10
+    //% color="#87CEEB"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function Humidity_Sensor(value: enIR): boolean {
 
-    //% blockId=newbit_Touch_Sensor block="Touch_Sensor|pin %pin| |%value|触摸"
+        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
+        if (pins.digitalReadPin(DigitalPin.P3) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+
+
+    //% blockId=newbit_Touch_Sensor block="Touch_Sensor|%value|触摸"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -508,7 +527,7 @@ namespace newbit_传感器类 {
         }
 
     }
-    //% blockId=newbit_Photosensitive_Sensor block="Photosensitive_Sensor|pin %pin| |%value|光照"
+    //% blockId=newbit_Photosensitive_Sensor block="Photosensitive_Sensor|%value|光照"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -525,7 +544,7 @@ namespace newbit_传感器类 {
 
     }
 
-    //% blockId=newbit_Flame_Sensor block="Flame_Sensor|pin %pin| |%value|火焰"
+    //% blockId=newbit_Flame_Sensor block="Flame_Sensor|%value|火焰"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -550,7 +569,7 @@ namespace newbit_传感器类 {
             control.waitMicros(13);
         }
     }
-    //% blockId=newbit_IR_Sensor block="IR_Sensor|pin %pin| |%value|障碍物"
+    //% blockId=newbit_IR_Sensor block="IR_Sensor|%value|障碍物"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
