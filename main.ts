@@ -1,4 +1,4 @@
-/*  2019.0527.14:37
+/*  2019.0530.18:07
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -505,10 +505,10 @@ namespace newbit_传感器类 {
 
         pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
         if (pins.digitalReadPin(DigitalPin.P3) == value) {
-            return true;
+            return false ;
         }
         else {
-            return false;
+            return true;
         }
 
     }
@@ -524,10 +524,10 @@ namespace newbit_传感器类 {
 
         pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
         if (pins.digitalReadPin(DigitalPin.P9) == value) {
-            return true;
+            return false;
         }
         else {
-            return false;
+            return true;
         }
 
     }
@@ -1220,7 +1220,5 @@ namespace newbit_小车类 {
             case CarState.Car_SpinRight: Car_spinright(speed); break;
         }
     }
-
-
 }
  
