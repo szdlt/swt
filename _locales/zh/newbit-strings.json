@@ -22,7 +22,7 @@
   
   "newbit_电机类.Vibrator_Open|block": "开始震动",
   "newbit_电机类.Vibrator_Close|block": "停止震动",
-  "newbit_电机类.MotorRun|block": "电机控制|%index0|%index1|速度%speed",
+  
   
   "newbit_小车类.Ultrasonic_Car|block": "超声波返回（cm）",
   "newbit_小车类.Music_Car|block": "小车音乐播放|%index",
@@ -34,6 +34,6 @@
   "newbit_小车类.BluetoothCarControl|block": "APP小车运动控制%uartData",
   "newbit_小车类.BluetoothModeSelect|block": "APP小车模式选择%uartData返回类型",
   "newbit_小车类.BluetoothServoControl|block": "APP舵机控制%uartData"
-  
+  "newbit_小车类.MotorRun|block": "电机控制|%index0|%index1|速度%speed",
 }
 
