@@ -1,4 +1,4 @@
-/*  2019.0530.18:07
+/*  2019.0601.18:07
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -766,7 +766,22 @@ namespace newbit_小车类 {
         //% blockId="Car_BiZhang" block="避障"  
         Car_BiZhang = 2
        
+    }
+    export enum MotorNum {
+       //% blockId="Motor0" block="电机1"
+        Motor0 = 0,
+	  //% blockId="Motor1"  block="电机2"
+        Motor1 =1
+        
+    
     }	
+	export enum MotorDir {
+       //% blockId="clockwise" block="正转"
+        clockwise = 0,
+	//% blockId="anticlockwise" block="反转"
+        anticlockwise = 1
+    }	
+	
     export enum CarState {
         //% blockId="Car_Run" block="前行"
         Car_Run = 1,
@@ -923,6 +938,8 @@ namespace newbit_小车类 {
         buf[4] = (off >> 8) & 0xff;
         pins.i2cWriteBuffer(PCA9685_ADD, buf);
     }
+	
+	
     function Car_run(speed: number) {
         speed = speed * 16; // map 350 to 4096
         if (speed >= 4096) {
@@ -1187,11 +1204,48 @@ namespace newbit_小车类 {
         }
         return temp;
     }
-    //% blockId=newbit_CarCtrl block="CarCtrl|%index"
+	//% blockId=newbit_MotorRun block="MotorRun|%index0|%index1|speed%speed"
     //% weight=93
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+	export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) 
+	    {
+	           if(index0 == Motor0){
+				   if(index1 == clockwise) 
+				   {
+					  setPwm(12, 0, speed);
+                      setPwm(13, 0, 0);
+         
+				   }
+				   else if(index1 == anticlockwise) 
+				   {
+					  setPwm(12, 0, 0);
+                      setPwm(13, 0, speed);  
+					   
+				   } 
+			   }
+	           else if(index0 == Motor1)
+			   {
+				   if(index1 == clockwise) 
+				   {
+					 setPwm(14, 0, speed);
+                     setPwm(15, 0, 0);  
+					   
+				   }
+				   else if(index1 == anticlockwise) 
+				   {
+					  setPwm(15, 0, speed);
+                      setPwm(14, 0, 0);   
+					   
+				   }  
+				   
+			   }
+	    }
+	
+	
+	
+   
     export function CarCtrl(index: CarState): void {
         switch (index) {
             case CarState.Car_Run: Car_run(255); break;
