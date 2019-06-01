@@ -665,21 +665,6 @@ namespace newbit_音乐类 {
 
 namespace newbit_电机类 {
 
-    export enum MotorNum {
-        //% blockId="Motor0" block="电机1"
-        Motor0 = 0,
-        //% blockId="Motor1"  block="电机2"
-        Motor1 = 1
-
-
-    }
-    export enum MotorDir {
-        //% blockId="clockwise" block="正转"
-        clockwise = 0,
-        //% blockId="anticlockwise" block="反转"
-        anticlockwise = 1
-    }
-
     //% blockId=newbit_Vibrator_Open block="Vibrator_Open"
     //% weight=100
     //% blockGap=10
@@ -699,40 +684,6 @@ namespace newbit_电机类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Vibrator_Close(): void {
         pins.digitalWritePin(DigitalPin.P12, 0);
-    }
-
-    //% blockId=newbit_MotorRun block="MotorRun|%index0|%index1|speed%speed"
-    //% weight=93
-    //% blockGap=10
-    //% speed.min=0 speed.max=255
-    //% color="#0000CD"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) {
-        if (index0 == MotorNum.Motor0) {
-            if (index1 == MotorDir.clockwise) {
-                newbit_小车类.setPwm(12, 0, speed);
-                newbit_小车类.setPwm(13, 0, 0);
-
-            }
-            else if (index1 == MotorDir.anticlockwise) {
-                newbit_小车类.setPwm(12, 0, 0);
-                newbit_小车类.setPwm(13, 0, speed);
-
-            }
-        }
-        else if (index0 == MotorNum.Motor1) {
-            if (index1 == MotorDir.clockwise) {
-                newbit_小车类.setPwm(14, 0, speed);
-                newbit_小车类.setPwm(15, 0, 0);
-
-            }
-            else if (index1 == MotorDir.anticlockwise) {
-                newbit_小车类.setPwm(15, 0, speed);
-                newbit_小车类.setPwm(14, 0, 0);
-
-            }
-
-        }
     }
 }
 
@@ -817,7 +768,20 @@ namespace newbit_小车类 {
         Car_BiZhang = 2
 
     }
+    export enum MotorNum {
+        //% blockId="Motor0" block="电机1"
+        Motor0 = 0,
+        //% blockId="Motor1"  block="电机2"
+        Motor1 = 1
 
+
+    }
+    export enum MotorDir {
+        //% blockId="clockwise" block="正转"
+        clockwise = 0,
+        //% blockId="anticlockwise" block="反转"
+        anticlockwise = 1
+    }
     export enum CarState {
         //% blockId="Car_Run" block="前行"
         Car_Run = 1,
@@ -958,7 +922,7 @@ namespace newbit_小车类 {
         control.waitMicros(5000);
         i2cwrite_(PCA9685_ADD, MODE1, oldmode | 0xa1);
     }
-     export function setPwm(channel: number, on: number, off: number): void {
+    function setPwm(channel: number, on: number, off: number): void {
         if (channel < 0 || channel > 15)
             return;
         if (!initialized) {
@@ -1267,6 +1231,39 @@ namespace newbit_小车类 {
             case CarState.Car_Stop: Car_stop(); break;
             case CarState.Car_SpinLeft: Car_spinleft(speed); break;
             case CarState.Car_SpinRight: Car_spinright(speed); break;
+        }
+    }
+    //% blockId=newbit_MotorRun block="MotorRun|%index0|%index1|speed%speed"
+    //% weight=93
+    //% blockGap=10
+    //% speed.min=0 speed.max=255
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
+    export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) {
+        if (index0 == MotorNum.Motor0) {
+            if (index1 == MotorDir.clockwise) {
+                setPwm(12, 0, speed);
+                setPwm(13, 0, 0);
+
+            }
+            else if (index1 == MotorDir.anticlockwise) {
+                setPwm(12, 0, 0);
+                setPwm(13, 0, speed);
+
+            }
+        }
+        else if (index0 == MotorNum.Motor1) {
+            if (index1 == MotorDir.clockwise) {
+                setPwm(14, 0, speed);
+                setPwm(15, 0, 0);
+
+            }
+            else if (index1 == MotorDir.anticlockwise) {
+                setPwm(15, 0, speed);
+                setPwm(14, 0, 0);
+
+            }
+
         }
     }
 }
