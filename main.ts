@@ -1204,7 +1204,11 @@ namespace newbit_小车类 {
         }
         return temp;
     }
-
+    //% blockId=newbit_CarCtrl block="CarCtrl|%index"
+    //% weight=93
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrl(index: CarState): void {
         switch (index) {
             case CarState.Car_Run: Car_run(255); break;
