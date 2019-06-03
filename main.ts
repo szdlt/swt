@@ -1,4 +1,4 @@
-/*  2019.0601.19:21
+/*  2019.0603.14:23
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -710,7 +710,7 @@ namespace newbit_小车类 {
     const PRESCALE = 0xFE
     let initialized = false
     let g_mode = 0
-
+    let value_past = 90
     export enum enMusic {
         dadadum = 0,
         entertainer,
@@ -836,32 +836,32 @@ namespace newbit_小车类 {
         if (uartData.indexOf("*1-") != -1) {
             index = uartData.indexOf("*1-");
             servo1 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S1, servo1)
+            Servo_Car(enServo.S1, servo1 ,10)
         }
         else if (uartData.indexOf("*2-") != -1) {
             index = uartData.indexOf("*2-");
             servo2 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S2, servo2)
+            Servo_Car(enServo.S2, servo2, 10)
         }
         else if (uartData.indexOf("*3-") != -1) {
             index = uartData.indexOf("*3-");
             servo3 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S3, servo3)
+            Servo_Car(enServo.S3, servo3, 10)
         }
         else if (uartData.indexOf("*4-") != -1) {
             index = uartData.indexOf("*4-");
             servo4 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S4, servo4)
+            Servo_Car(enServo.S4, servo4, 10)
         }
         else if (uartData.indexOf("*5-") != -1) {
             index = uartData.indexOf("*5-");
             servo5 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S5, servo5)
+            Servo_Car(enServo.S5, servo5, 10)
         }
         else if (uartData.indexOf("*6-") != -1) {
             index = uartData.indexOf("*6-");
             servo6 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S6, servo6)
+            Servo_Car(enServo.S6, servo6, 10)
         }
 
     }
@@ -1116,17 +1116,40 @@ namespace newbit_小车类 {
             case enMusic.power_down: music.beginMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.Once); break;
         }
     }
-    //% blockId=newbit_Servo_Car block="Servo_Car|num %num|value %value"
+    //% blockId=newbit_Servo_Car block="Servo_Car|num %num|value %value |速度 %speed"
     //% weight=96
     //% blockGap=10
+    //% speed.min=1 speed.max=10
     //% color="#006400"
-    //% num.min=1 num.max=3 value.min=0 value.max=180
+    //% num.min=1 num.max=6 value.min=0 value.max=180
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function Servo_Car(num: enServo, value: number): void {
+    export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
-        let us = (value * 1800 / 180 + 600); // 0.6 ~ 2.4
-        let pwm = us * 4096 / 20000;
-        setPwm(num + 2, 0, pwm);
+        while (value_past != value) {
+            if (value_past > value) {
+
+                value_past - speed > value ? value_past -= speed : value_past--;
+                let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                let pwm = us * 4096 / 20000;
+                setPwm(num + 2, 0, pwm);
+                basic.pause(10);
+
+            }
+            else if (value_past < value) {
+
+                value_past + speed  < value ? value_past += speed : value_past++;
+                let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                let pwm = us * 4096 / 20000;
+                setPwm(num + 2, 0, pwm);
+                basic.pause(10);
+            }
+        }
+
+        {
+            let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+            let pwm = us * 4096 / 20000;
+            setPwm(num + 2, 0, pwm);
+        }
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
@@ -1271,3 +1294,4 @@ namespace newbit_小车类 {
         }
     }
 }
+ 
