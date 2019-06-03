@@ -51,6 +51,14 @@ namespace newbit_显示类 {
             setPixelRGB(Lights.Light2, QbitRGBColors.Violet)
             showLight()
         }
+	  else if (uartData == "*CL21") {
+            setPixelRGB(Lights.Light1, QbitRGBColors.White)
+            setPixelRGB(Lights.Light2, QbitRGBColors.White)
+            showLight()
+        }
+	  else if (uartData == "*CL20") {
+           clearLight()
+        }   
     }
 
     //% blockId="setBrightness" block="set brightness %brightness"
@@ -639,8 +647,11 @@ namespace newbit_音乐类 {
         else if (uartData == "*C7") {
             music.ringTone(932)
         }
-        else if (uartData == "*C8") {
+        else if (uartData == "*C0") {
             pins.digitalWritePin(DigitalPin.P0, 0)
+        }
+	else if (uartData == "*C8") {
+           music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
         }
 
     }
