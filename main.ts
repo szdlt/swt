@@ -1143,7 +1143,7 @@ namespace newbit_小车类 {
                 let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
                 let pwm = us * 4096 / 20000;
                 setPwm(num + 2, 0, pwm);
-                basic.pause(100);
+                basic.pause( 20);
 
             }
             else if (value_past < value) {
@@ -1152,7 +1152,7 @@ namespace newbit_小车类 {
                 let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
                 let pwm = us * 4096 / 20000;
                 setPwm(num + 2, 0, pwm);
-                basic.pause(100);
+                basic.pause(20);
             }
         }
 
