@@ -1137,6 +1137,14 @@ namespace newbit_小车类 {
     export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
         while (value_past != value) {
+		    if(speed == 0)
+		    {
+			    value_past = value;
+			    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                let pwm = us * 4096 / 20000;
+                setPwm(num + 2, 0, pwm);
+			}
+		    else {
             if (value_past > value) {
 
                 value_past - speed > value ? value_past -= speed : value_past--;
@@ -1154,13 +1162,14 @@ namespace newbit_小车类 {
                 setPwm(num + 2, 0, pwm);
                 basic.pause(20);
             }
-        }
-
-        {
-            let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
-            let pwm = us * 4096 / 20000;
-            setPwm(num + 2, 0, pwm);
-        }
+			    {
+                 let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                 let pwm = us * 4096 / 20000;
+                 setPwm(num + 2, 0, pwm);
+                }
+			
+		   }   
+        } 
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
