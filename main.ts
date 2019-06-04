@@ -1278,7 +1278,7 @@ namespace newbit_小车类 {
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) {
-        if (index0 == MotorNum.Motor0) {
+        if (index0 == MotorNum.Motor1) {
             if (index1 == MotorDir.clockwise) {
                 setPwm(12, 0, speed*16);
                 setPwm(13, 0, 0);
@@ -1290,7 +1290,7 @@ namespace newbit_小车类 {
 
             }
         }
-        else if (index0 == MotorNum.Motor1) {
+        else if (index0 == MotorNum.Motor0) {
             if (index1 == MotorDir.clockwise) {
                 setPwm(14, 0, speed*16);
                 setPwm(15, 0, 0);
