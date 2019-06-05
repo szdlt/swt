@@ -62,6 +62,7 @@ namespace newbit_显示类 {
     }
 
     //% blockId="setBrightness" block="set brightness %brightness"
+    //% brightness.min=0 brightness.max=255
     //% weight=92
     export function setBrightness(brightness: number): void {
         lhRGBLight.setBrightness(brightness);
@@ -655,15 +656,15 @@ namespace newbit_音乐类 {
         }
 
     }
-    //% blockId=newbit_Buzzer block="Buzzer|pin %pin|value %value"
+    //% blockId=newbit_Buzzer block="关闭蜂鸣器"
     //% weight=100
     //% blockGap=10 
     //% color="#D2691E"
     //% value.min=0 value.max=1
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=8
-    export function Buzzer(value: enBuzzer): void {
+    export function Buzzer(): void {
         pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
-        pins.digitalWritePin(DigitalPin.P0, value);
+        pins.digitalWritePin(DigitalPin.P0, 0);
     }
 
 }
