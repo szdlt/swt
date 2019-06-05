@@ -17,7 +17,7 @@
   "newbit_传感器类.Touch_Sensor|block": "触摸传感器|%value|触摸",
   "newbit_传感器类.Humidity_Sensor|block": "湿度传感器检测到土壤湿度|%value",
   
-  "newbit_音乐类.Buzzer|block": "有源蜂鸣器|值 %value",
+  "newbit_音乐类.Buzzer|block": "关闭蜂鸣器",
   "newbit_音乐类.BluetoothMusic|block": "APP音乐播放%uartData",
   
   "newbit_电机类.Vibrator_Open|block": "开始震动",
