@@ -656,7 +656,7 @@ namespace newbit_音乐类 {
         }
 
     }
-    //% blockId=newbit_Buzzer block="关闭蜂鸣器"
+    //% blockId=newbit_Buzzer block="Buzzer"
     //% weight=100
     //% blockGap=10 
     //% color="#D2691E"
