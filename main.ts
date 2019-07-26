@@ -628,7 +628,6 @@ namespace newbit_音乐类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function BluetoothMusic(uartData: string): void {
 	    
-     /*    
         if (uartData == "*C1") {
             music.ringTone(262)
         }
@@ -651,13 +650,12 @@ namespace newbit_音乐类 {
             music.ringTone(932)
         }
         else if (uartData == "*C0") {
-	    pins.setPull(DigitalPin.P0, PinPullMode.PullNone)
             pins.digitalWritePin(DigitalPin.P0, 0)
         }
 	else if (uartData == "*C8") {
-           music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
+        //   music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
         }
-       */
+       
     }
     //% blockId=newbit_Buzzer block="Buzzer"
     //% weight=100
