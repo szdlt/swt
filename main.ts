@@ -627,6 +627,8 @@ namespace newbit_音乐类 {
     //% color="#D2691E"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function BluetoothMusic(uartData: string): void {
+	    
+     /*    
         if (uartData == "*C1") {
             music.ringTone(262)
         }
@@ -655,7 +657,7 @@ namespace newbit_音乐类 {
 	else if (uartData == "*C8") {
            music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
         }
-
+       */
     }
     //% blockId=newbit_Buzzer block="Buzzer"
     //% weight=100
