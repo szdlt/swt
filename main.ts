@@ -1172,7 +1172,7 @@ namespace newbit_小车类 {
 			
 		   }   
         } 
-	      num =  num_past;
+	      num_past = num;
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
