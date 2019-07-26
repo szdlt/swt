@@ -649,6 +649,7 @@ namespace newbit_音乐类 {
             music.ringTone(932)
         }
         else if (uartData == "*C0") {
+	    pins.setPull(DigitalPin.P0, PinPullMode.PullNone)
             pins.digitalWritePin(DigitalPin.P0, 0)
         }
 	else if (uartData == "*C8") {
