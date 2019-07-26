@@ -1,4 +1,4 @@
-/*  2019.0603.14:23
+/*  2019.0726.13:49
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -722,8 +722,13 @@ namespace newbit_小车类 {
     const PRESCALE = 0xFE
     let initialized = false
     let g_mode = 0
-    let value_past = 90
-    let num_past = 0
+	let value_past = 0
+    let value1_past = -1
+	let value2_past = -1
+	let value3_past = -1
+	let value4_past = -1
+	let value5_past = -1
+	let value6_past = -1
     export enum enMusic {
         dadadum = 0,
         entertainer,
@@ -1138,8 +1143,16 @@ namespace newbit_小车类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
-        while (value_past != value || num_past != num) {
-		    if(speed == 0)
+		if(num == 1){ value_past =  value1_past; }
+		else if(num == 2){ value_past =  value2_past; }
+		else if(num == 3){ value_past =  value3_past; }
+		else if(num == 4){ value_past =  value4_past; }
+		else if(num == 5){ value_past =  value5_past; }
+		else if(num == 6){ value_past =  value6_past; }
+		
+		
+        while (value_past != value) {
+		    if(speed == 0  || value_past == -1)
 		    {
 			    value_past = value;
 			    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
@@ -1172,7 +1185,12 @@ namespace newbit_小车类 {
 			
 		   }   
         } 
-	      num_past = num;
+		if(num == 1){ value1_past =  value; }
+		else if(num == 2){ value2_past =  value; }
+		else if(num == 3){ value3_past =  value; }
+		else if(num == 4){ value4_past =  value; }
+		else if(num == 5){ value5_past =  value; }
+		else if(num == 6){ value6_past =  value; }
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
