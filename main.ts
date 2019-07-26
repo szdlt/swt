@@ -723,6 +723,7 @@ namespace newbit_小车类 {
     let initialized = false
     let g_mode = 0
     let value_past = 90
+    let num_past = 0
     export enum enMusic {
         dadadum = 0,
         entertainer,
@@ -1137,7 +1138,7 @@ namespace newbit_小车类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
-        while (value_past != value) {
+        while (value_past != value || num_past != num) {
 		    if(speed == 0)
 		    {
 			    value_past = value;
@@ -1171,6 +1172,7 @@ namespace newbit_小车类 {
 			
 		   }   
         } 
+	      num =  num_past;
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
