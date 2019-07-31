@@ -1,4 +1,4 @@
-# newbit
+# swtPackage
 
 Extension for SiWuTian newbit
 
