@@ -51,14 +51,14 @@ namespace newbit_显示类 {
             setPixelRGB(Lights.Light2, QbitRGBColors.Violet)
             showLight()
         }
-	  else if (uartData == "*CL21") {
+        else if (uartData == "*CL21") {
             setPixelRGB(Lights.Light1, QbitRGBColors.White)
             setPixelRGB(Lights.Light2, QbitRGBColors.White)
             showLight()
         }
-	  else if (uartData == "*CL20") {
-           clearLight()
-        }   
+        else if (uartData == "*CL20") {
+            clearLight()
+        }
     }
 
     //% blockId="setBrightness" block="set brightness %brightness"
@@ -627,7 +627,7 @@ namespace newbit_音乐类 {
     //% color="#D2691E"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function BluetoothMusic(uartData: string): void {
-	    
+
         if (uartData == "*C1") {
             music.ringTone(262)
         }
@@ -650,13 +650,13 @@ namespace newbit_音乐类 {
             music.ringTone(932)
         }
         else if (uartData == "*C0") {
-	    pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
+            pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
             pins.digitalWritePin(DigitalPin.P0, 0)
         }
-	else if (uartData == "*C8") {
-        //   music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
+        else if (uartData == "*C8") {
+            //   music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
         }
-       
+
     }
     //% blockId=newbit_Buzzer block="Buzzer"
     //% weight=100
@@ -724,13 +724,13 @@ namespace newbit_小车类 {
     const PRESCALE = 0xFE
     let initialized = false
     let g_mode = 0
-	let value_past = 0
+    let value_past = 0
     let value1_past = -1
-	let value2_past = -1
-	let value3_past = -1
-	let value4_past = -1
-	let value5_past = -1
-	let value6_past = -1
+    let value2_past = -1
+    let value3_past = -1
+    let value4_past = -1
+    let value5_past = -1
+    let value6_past = -1
     export enum enMusic {
         dadadum = 0,
         entertainer,
@@ -856,7 +856,7 @@ namespace newbit_小车类 {
         if (uartData.indexOf("*1-") != -1) {
             index = uartData.indexOf("*1-");
             servo1 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S1, servo1 ,10)
+            Servo_Car(enServo.S1, servo1, 10)
         }
         else if (uartData.indexOf("*2-") != -1) {
             index = uartData.indexOf("*2-");
@@ -1094,7 +1094,7 @@ namespace newbit_小车类 {
         // read pulse
         let d = pins.pulseIn(echoPin, PulseValue.High, 11600);
         basic.pause(10);
-        return d / 40;
+        return Math.floor(d / 40);
         // send pulse
         //    pins.setPull(DigitalPin.P14, PinPullMode.PullNone);    
         //    pins.digitalWritePin(DigitalPin.P14, 0);
@@ -1145,54 +1145,53 @@ namespace newbit_小车类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
-		if(num == 1){ value_past =  value1_past; }
-		else if(num == 2){ value_past =  value2_past; }
-		else if(num == 3){ value_past =  value3_past; }
-		else if(num == 4){ value_past =  value4_past; }
-		else if(num == 5){ value_past =  value5_past; }
-		else if(num == 6){ value_past =  value6_past; }
-		
-		
+        if (num == 1) { value_past = value1_past; }
+        else if (num == 2) { value_past = value2_past; }
+        else if (num == 3) { value_past = value3_past; }
+        else if (num == 4) { value_past = value4_past; }
+        else if (num == 5) { value_past = value5_past; }
+        else if (num == 6) { value_past = value6_past; }
+
+
         while (value_past != value) {
-		    if(speed == 0  || value_past == -1)
-		    {
-			    value_past = value;
-			    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
-                let pwm = us * 4096 / 20000;
-                setPwm(num + 2, 0, pwm);
-			}
-		    else {
-            if (value_past > value) {
-
-                value_past - speed > value ? value_past -= speed : value_past--;
+            if (speed == 0 || value_past == -1) {
+                value_past = value;
                 let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
                 let pwm = us * 4096 / 20000;
                 setPwm(num + 2, 0, pwm);
-                basic.pause( 20);
-
             }
-            else if (value_past < value) {
+            else {
+                if (value_past > value) {
 
-                value_past + speed  < value ? value_past += speed : value_past++;
-                let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
-                let pwm = us * 4096 / 20000;
-                setPwm(num + 2, 0, pwm);
-                basic.pause(20);
-            }
-			    {
-                 let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
-                 let pwm = us * 4096 / 20000;
-                 setPwm(num + 2, 0, pwm);
+                    value_past - speed > value ? value_past -= speed : value_past--;
+                    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                    let pwm = us * 4096 / 20000;
+                    setPwm(num + 2, 0, pwm);
+                    basic.pause(20);
+
                 }
-			
-		   }   
-        } 
-		if(num == 1){ value1_past =  value; }
-		else if(num == 2){ value2_past =  value; }
-		else if(num == 3){ value3_past =  value; }
-		else if(num == 4){ value4_past =  value; }
-		else if(num == 5){ value5_past =  value; }
-		else if(num == 6){ value6_past =  value; }
+                else if (value_past < value) {
+
+                    value_past + speed < value ? value_past += speed : value_past++;
+                    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                    let pwm = us * 4096 / 20000;
+                    setPwm(num + 2, 0, pwm);
+                    basic.pause(20);
+                }
+                {
+                    let us = (value_past * 1800 / 180 + 600); // 0.6 ~ 2.4
+                    let pwm = us * 4096 / 20000;
+                    setPwm(num + 2, 0, pwm);
+                }
+
+            }
+        }
+        if (num == 1) { value1_past = value; }
+        else if (num == 2) { value2_past = value; }
+        else if (num == 3) { value3_past = value; }
+        else if (num == 4) { value4_past = value; }
+        else if (num == 5) { value5_past = value; }
+        else if (num == 6) { value6_past = value; }
     }
     //% blockId=newbit_Avoid_Sensor block="Avoid_Sensor|value %value"
     //% weight=95
@@ -1312,24 +1311,24 @@ namespace newbit_小车类 {
     export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) {
         if (index0 == MotorNum.Motor1) {
             if (index1 == MotorDir.clockwise) {
-                setPwm(12, 0, speed*16);
+                setPwm(12, 0, speed * 16);
                 setPwm(13, 0, 0);
 
             }
             else if (index1 == MotorDir.anticlockwise) {
                 setPwm(12, 0, 0);
-                setPwm(13, 0, speed*16);
+                setPwm(13, 0, speed * 16);
 
             }
         }
         else if (index0 == MotorNum.Motor0) {
             if (index1 == MotorDir.clockwise) {
-                setPwm(14, 0, speed*16);
+                setPwm(14, 0, speed * 16);
                 setPwm(15, 0, 0);
 
             }
             else if (index1 == MotorDir.anticlockwise) {
-                setPwm(15, 0, speed*16);
+                setPwm(15, 0, speed * 16);
                 setPwm(14, 0, 0);
 
             }
@@ -1337,4 +1336,4 @@ namespace newbit_小车类 {
         }
     }
 }
- 
+
