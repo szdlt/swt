@@ -864,32 +864,32 @@ namespace newbit_小车类 {
         if (uartData.indexOf("*1-") != -1) {
             index = uartData.indexOf("*1-");
             servo1 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S1, servo1, 10)
+            Servo_Car(enServo.S1, servo1, 0)
         }
         else if (uartData.indexOf("*2-") != -1) {
             index = uartData.indexOf("*2-");
             servo2 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S2, servo2, 10)
+            Servo_Car(enServo.S2, servo2, 0)
         }
         else if (uartData.indexOf("*3-") != -1) {
             index = uartData.indexOf("*3-");
             servo3 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S3, servo3, 10)
+            Servo_Car(enServo.S3, servo3, 0)
         }
         else if (uartData.indexOf("*4-") != -1) {
             index = uartData.indexOf("*4-");
             servo4 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S4, servo4, 10)
+            Servo_Car(enServo.S4, servo4, 0)
         }
         else if (uartData.indexOf("*5-") != -1) {
             index = uartData.indexOf("*5-");
             servo5 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S5, servo5, 10)
+            Servo_Car(enServo.S5, servo5, 0)
         }
         else if (uartData.indexOf("*6-") != -1) {
             index = uartData.indexOf("*6-");
             servo6 = parseInt(uartData.substr(3, uartData.length - 3))
-            Servo_Car(enServo.S6, servo6, 10)
+            Servo_Car(enServo.S6, servo6, 0)
         }
 
     }
