@@ -654,7 +654,9 @@ namespace newbit_音乐类 {
             pins.digitalWritePin(DigitalPin.P0, 0)
         }
         else if (uartData == "*C8") {
-            //   music.beginMelody(music.builtInMelody(Melodies.BaDing), MelodyOptions.Once)
+		
+           music.beginMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
+			  
         }
 
     }
@@ -731,6 +733,7 @@ namespace newbit_小车类 {
     let value4_past = -1
     let value5_past = -1
     let value6_past = -1
+    let car_speed = 200
     export enum enMusic {
         dadadum = 0,
         entertainer,
@@ -816,7 +819,11 @@ namespace newbit_小车类 {
         //% blockId="Car_SpinLeft" block="原地左旋"
         Car_SpinLeft = 6,
         //% blockId="Car_SpinRight" block="原地右旋"
-        Car_SpinRight = 7
+        Car_SpinRight = 7,
+	//% blockId="Car_SpeedUp" block="加速"
+	Car_SpeedUp  = 8,
+	//% blockId="Car_SpeedDown" block="减速"
+	Car_SpeedDown = 9
     }
     //% blockId=newbit_BluetoothCarControl block="BluetoothCarControl|%uartData"
     //% weight=92
@@ -835,9 +842,9 @@ namespace newbit_小车类 {
         } else if (uartData == "*CE") {
             CarCtrl(CarState.Car_Stop)
         } else if (uartData == "*CADD") {
-            CarCtrl(CarState.Car_Stop)
+            CarCtrl(CarState.Car_SpeedUp)
         } else if (uartData == "*CSD") {
-            CarCtrl(CarState.Car_Stop)
+            CarCtrl(CarState.Car_SpeedDown)
         }
     }
     //% blockId=newbit_BluetoothServoControl block="BluetoothServoControl|%uartData"
@@ -1074,6 +1081,15 @@ namespace newbit_小车类 {
         //pins.digitalWritePin(DigitalPin.P16, 1);
         //pins.analogWritePin(AnalogPin.P1, 1023-speed);
     }
+	function Car_SpeedUp() {
+        if(car_speed <= 250)
+	   car_speed+=5;
+    }
+	function Car_SpeedDown() {
+         if(car_speed >= 50)
+	    car_speed-=5;
+    }
+	
     //% blockId=newbit_ultrasonic_car block="ultrasonic return distance(cm)"
     //% color="#006400"
     //% weight=98
@@ -1276,13 +1292,15 @@ namespace newbit_小车类 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrl(index: CarState): void {
         switch (index) {
-            case CarState.Car_Run: Car_run(255); break;
-            case CarState.Car_Back: Car_back(255); break;
-            case CarState.Car_Left: Car_left(255); break;
-            case CarState.Car_Right: Car_right(255); break;
+            case CarState.Car_Run: Car_run(car_speed); break;
+            case CarState.Car_Back: Car_back(car_speed); break;
+            case CarState.Car_Left: Car_left(car_speed); break;
+            case CarState.Car_Right: Car_right(car_speed); break;
             case CarState.Car_Stop: Car_stop(); break;
-            case CarState.Car_SpinLeft: Car_spinleft(255); break;
-            case CarState.Car_SpinRight: Car_spinright(255); break;
+            case CarState.Car_SpinLeft: Car_spinleft(car_speed); break;
+            case CarState.Car_SpinRight: Car_spinright(car_speed); break;
+	    case CarState.Car_SpeedUp:   Car_SpeedUp(); break;
+            case CarState.Car_SpeedDown: Car_SpeedDown(); break;
         }
     }
     //% blockId=newbit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
