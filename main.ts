@@ -654,9 +654,8 @@ namespace newbit_音乐类 {
             pins.digitalWritePin(DigitalPin.P0, 0)
         }
         else if (uartData == "*C8") {
-		
        //    music.beginMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
-	     music.playTone(139, music.beat(BeatFraction.Whole))
+	     music.ringTone(139)
 			  
         }
 
