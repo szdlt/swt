@@ -1,4 +1,4 @@
-/*  2019.0726.13:49
+/*  2019.0812.10:20
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -533,10 +533,10 @@ namespace newbit_传感器类 {
 
         pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
         if (pins.digitalReadPin(DigitalPin.P9) == value) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
 
     }
