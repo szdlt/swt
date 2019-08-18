@@ -533,10 +533,10 @@ namespace newbit_传感器类 {
 
         pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
         if (pins.digitalReadPin(DigitalPin.P9) == value) {
-            return true;
+            return false;
         }
         else {
-            return false;
+            return true;
         }
 
     }
