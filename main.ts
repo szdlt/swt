@@ -831,9 +831,9 @@ namespace newbit_小车类 {
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function BluetoothCarControl(uartData: string): void {
-        if (uartData == "*CB") {
+        if (uartData == "*CA") {
             CarCtrl(CarState.Car_Run)
-        } else if (uartData == "*CA") {
+        } else if (uartData == "*CB") {
             CarCtrl(CarState.Car_Back)
         } else if (uartData == "*CC") {
             CarCtrl(CarState.Car_SpinLeft)
