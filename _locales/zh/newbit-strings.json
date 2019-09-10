@@ -34,7 +34,7 @@
   "newbit_小车类.BluetoothCarControl|block": "APP小车运动控制%uartData",
   "newbit_小车类.BluetoothModeSelect|block": "APP小车模式选择%uartData返回类型",
   "newbit_小车类.BluetoothServoControl|block": "APP舵机控制%uartData",
-  "newbit_小车类.MotorRun|block": "电机控制|%index0|%index1|速度%speed"
+  "newbit_小车类.MotorRun|block": "电机控制|%index0|%index1|速度%speed",
   
   "newbit_积木类.BuildingBlocks|block": "深联积木%uartData"
 }
