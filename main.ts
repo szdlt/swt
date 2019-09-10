@@ -1,4 +1,4 @@
-/*  2019.0812.10:20
+/*  2019.0910.10:20
 modified from duncan
 load dependency
 "newbit": "file:../pxt-newbit"
@@ -1355,3 +1355,371 @@ namespace newbit_小车类 {
     }
 }
 
+//% color="#87CEEB" weight=24 icon="\uf1b6"
+namespace newbit_积木类 {
+
+    let StrAt = -1
+    let MoveType = -1
+    let dlbot_pos = -1
+    let dlbot_id = -1
+    let dlbot_speed = -1
+    let rgb_id = -1
+    let rgb_color = -1
+    let rgb_bright = -1
+    let color_id = -1
+    let tone = -1
+    let dlbot_beat = -1
+    let show_number = -1
+    let coo_x = -1
+    let coo_y = -1
+    let coo_on = -1
+    let hour = -1
+    let minus = -1
+    let mode = -1
+    let move = -1
+    let speed = -1
+    let time = -1
+    let direction = -1
+    let position = -1
+    let pin = -1
+    let analog_pin = -1
+    let Stm32_POS = -1
+    let Stm32_ID = -1
+    let Stm32_GROUP = -1
+    let Move_T = -1
+    let stringReceive = ""
+    let Tone = [65, 65, 73, 82, 87, 98, 110, 123,
+        131, 147, 165, 175, 196, 220, 247,
+        262, 294, 330, 349, 392, 440, 494,
+        523, 587, 659, 698, 784, 880, 988,
+        1047, 1175, 1319, 1397, 1568, 1760, 1976,
+        2093, 2349, 2637, 2794, 3136, 3520, 3951,
+        4186, 4699]
+    let Beat = [16, 16, 8, 4, 2, 1, 32, 64]
+    enum CMD_TYPE {
+        NO_COMMAND,
+        GO_AHEAD,
+        GO_BACK,
+        TURN_LEFT,
+        TURN_RIGHT,
+        TURN_LEFT_SLOW,
+        TURN_RIGHT_SLOW,
+        GO_AHEAD_SLOW,
+        STOP_COMMAND,
+        HEAD_LIGHT_ON,
+        HEAD_LIGHT_OFF,
+        HONK_HORN,
+        HONK_HORN_LONG,
+        READ_VERSION,
+        SET_RGB_LIGHT,
+        MST,
+        DST,
+        STO,
+        LIG,
+        COL,
+        TON,
+        VER,
+        POS,
+        COO,
+        TIM,
+        MOD,
+        SEN,
+        SNB,
+        CHE,
+        EXT,
+        TEM,
+        STA,
+        SERVO_MOVE,
+        SERVO_ONE,
+        SERVO_GROUP,
+        STM32_MOVE
+
+    }
+    let CMD_MULT_SERVO_MOVE = 3
+    let CMD_FULL_ACTION_RUN = 6
+    let CMD_TANK_FRONT = 9
+    let CMD_TANK_BACK = 10
+    let CMD_TANK_LEFT = 11
+    let CMD_TANK_RIGHT = 12
+    let CMD_TANK_STOP = 17
+    let cmdType = -1
+    function SendOneServoToMcu(time: number, id: number, pos: number) {
+
+        serial.writeNumber(0x55);
+        serial.writeNumber(0x55);
+        serial.writeNumber(0x8);
+        serial.writeNumber(CMD_MULT_SERVO_MOVE);
+        serial.writeNumber(1);
+        serial.writeNumber(time & 0xFF);
+        serial.writeNumber(time >> 8);
+        serial.writeNumber(id);
+        serial.writeNumber(pos & 0xFF);
+        serial.writeNumber(pos >> 8);
+    }
+    function SendServoGroupToMcu(group: number, times: number) {
+
+        serial.writeNumber(0x55);
+        serial.writeNumber(0x55);
+        serial.writeNumber(4);
+        serial.writeNumber(CMD_FULL_ACTION_RUN);
+        serial.writeNumber(group & 0xFF);
+        serial.writeNumber(times & 0xFF);
+        serial.writeNumber(times >> 8);
+    }
+    function SendMoveTypeToMcu(type: number) {
+
+        serial.writeNumber(0x55);
+        serial.writeNumber(0x55);
+        serial.writeNumber(2);
+        serial.writeNumber(type & 0xFF);
+    }
+
+    //% blockId=newbit_BuildingBlocks block="BuildingBlocks|%uartData"
+    //% weight=96
+    //% blockGap=10
+    //% color="#006400"
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
+
+    export function BuildingBlocks(uartData: string): number {
+
+        serial.redirect(
+            SerialPin.P12,
+            SerialPin.P13,
+            BaudRate.BaudRate115200)
+
+        if (uartData.indexOf("*@") != -1) {
+
+            if (uartData.indexOf("mst") != -1) {
+                StrAt = uartData.indexOf("mst")
+                move = parseInt(uartData.substr(StrAt + 4, 1))
+                speed = parseInt(uartData.substr(StrAt + 6, 3))
+                time = parseInt(uartData.substr(StrAt + 10, 2))
+
+                if (move == 1) {
+                    newbit_小车类.CarCtrlSpeed(newbit_小车类.CarState.Car_Run, speed * 2.5)
+                    basic.pause(time * 1000)
+                    if (time != 0) {
+                        newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+                    }
+                }
+                else if (move == 2) {
+                    newbit_小车类.CarCtrlSpeed(newbit_小车类.CarState.Car_Back, speed * 2.5)
+                    basic.pause(time * 1000)
+                    if (time != 0) {
+                        newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+                    }
+                }
+                cmdType = CMD_TYPE.MST;
+
+            }
+            else if (uartData.indexOf("dst") != -1) {
+                StrAt = uartData.indexOf("dst")
+                direction = parseInt(uartData.substr(StrAt + 4, 1))
+                speed = parseInt(uartData.substr(StrAt + 6, 3))
+                time = parseInt(uartData.substr(StrAt + 10, 2))
+                if (direction == 1) {  // right
+                    newbit_小车类.CarCtrlSpeed(newbit_小车类.CarState.Car_SpinRight, speed * 2.5) // 
+                    basic.pause(time * 1000)
+                    if (time != 0) {
+                        newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+                    }
+                }
+                else if (direction == 2) {  // left
+                    newbit_小车类.CarCtrlSpeed(newbit_小车类.CarState.Car_SpinLeft, speed * 2.5)
+                    basic.pause(time * 1000)
+                    if (time != 0) {
+                        newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+                    }
+                }
+                cmdType = CMD_TYPE.DST;
+            }
+            else if (uartData.indexOf("sto") != -1) {
+                newbit_小车类.CarCtrl(newbit_小车类.CarState.Car_Stop)
+                cmdType = CMD_TYPE.STO;
+            }
+            else if (uartData.indexOf("lig") != -1) {
+                StrAt = uartData.indexOf("lig")
+                rgb_id = parseInt(uartData.substr(StrAt + 4, 1))
+                rgb_color = parseInt(uartData.substr(StrAt + 6, 1))
+                rgb_bright = parseInt(uartData.substr(StrAt + 8, 3))
+                if (rgb_id != 0) {
+                    newbit_显示类.setPixelRGB(rgb_id - 1, rgb_color)
+                    newbit_显示类.setBrightness(rgb_bright * 2.5)
+                    newbit_显示类.showLight()
+                }
+                else {
+                    newbit_显示类.clearLight()
+                }
+                cmdType = CMD_TYPE.LIG;
+
+            }
+            else if (uartData.indexOf("col") != -1) {
+                StrAt = uartData.indexOf("col")
+                color_id = parseInt(uartData.substr(StrAt + 4, 1))
+                if (color_id == 1) {
+                    if (newbit_传感器类.checkCurrentColor(newbit_传感器类.Colors.Red) == true) {
+
+                        bluetooth.uartWriteString("*@col-1#")
+                    }
+                    else {
+
+                        bluetooth.uartWriteString("*@col-0#")
+                    }
+                }
+                else if (color_id == 2) {
+                    if (newbit_传感器类.checkCurrentColor(newbit_传感器类.Colors.Green) == true) {
+
+                        bluetooth.uartWriteString("*@col-1#")
+                    }
+                    else {
+                        bluetooth.uartWriteString("*@col-0#")
+
+                    }
+                }
+                else if (color_id == 3) {
+                    if (newbit_传感器类.checkCurrentColor(newbit_传感器类.Colors.Blue) == true) {
+
+                        bluetooth.uartWriteString("*@col-1#")
+                    }
+                    else {
+                        bluetooth.uartWriteString("*@col-0#")
+                    }
+                }
+                cmdType = CMD_TYPE.COL;
+            }
+
+            else if (uartData.indexOf("ton") != -1) {
+
+                StrAt = uartData.indexOf("ton")
+                tone = parseInt(uartData.substr(StrAt + 4, 2))
+                dlbot_beat = parseInt(uartData.substr(StrAt + 7, 1))
+                music.playTone(Tone[tone], Beat[dlbot_beat])
+                cmdType = CMD_TYPE.TON;
+            }
+            else if (uartData.indexOf("ver") != -1) {
+                cmdType = CMD_TYPE.VER;
+                bluetooth.uartWriteString("*@Microbit_V0#")
+            }
+            else if (uartData.indexOf("pos") != -1) {
+                StrAt = uartData.indexOf("pos")
+                show_number = parseInt(uartData.substr(StrAt + 7, uartData.length - StrAt - 7))  /// mark 
+                basic.showNumber(show_number)
+                cmdType = CMD_TYPE.POS;
+            }
+            else if (uartData.indexOf("coo") != -1) {
+                StrAt = uartData.indexOf("coo")
+                coo_x = parseInt(uartData.substr(StrAt + 4, 2))
+                coo_y = parseInt(uartData.substr(StrAt + 7, 2))
+                coo_on = parseInt(uartData.substr(StrAt + 10, 1))
+
+                cmdType = CMD_TYPE.COO;
+            }
+            else if (uartData.indexOf("tim") != -1) {
+                StrAt = uartData.indexOf("tim")
+                hour = parseInt(uartData.substr(StrAt + 4, 2))
+                minus = parseInt(uartData.substr(StrAt + 7, 2))
+                cmdType = CMD_TYPE.TIM;
+            }
+            else if (uartData.indexOf("mod") != -1) {
+
+                StrAt = uartData.indexOf("mod")
+                mode = parseInt(uartData.substr(StrAt + 4, 1))
+                cmdType = CMD_TYPE.MOD;
+            }
+            else if (uartData.indexOf("sen") != -1) {
+
+                StrAt = uartData.indexOf("sen")
+                stringReceive = uartData.substr(StrAt + 4, uartData.length - StrAt - 4)  /// mark 	
+                cmdType = CMD_TYPE.SEN;
+            }
+
+            else if (uartData.indexOf("che") != -1) {
+                StrAt = uartData.indexOf("che")
+                pin = parseInt(uartData.substr(StrAt + 4, 1))
+                cmdType = CMD_TYPE.CHE;
+            }
+
+            else if (uartData.indexOf("ext") != -1) {
+                StrAt = uartData.indexOf("ext")
+                analog_pin = parseInt(uartData.substr(StrAt + 4, 1))
+                cmdType = CMD_TYPE.EXT;
+            }
+            else if (uartData.indexOf("tem") != -1) {
+                let wendu = input.temperature()
+                bluetooth.uartWriteString("*@tem-" + wendu + "#")
+                cmdType = CMD_TYPE.TEM;
+            }
+
+            else if (uartData.indexOf("sta") != -1) {
+
+                if (newbit_小车类.Line_Sensor(newbit_小车类.enPos.LeftState, newbit_小车类.enLineState.White) && (newbit_小车类.Line_Sensor(newbit_小车类.enPos.RightState, newbit_小车类.enLineState.White))) {
+                    bluetooth.uartWriteString("*@sta-0#")
+                }
+                else if (newbit_小车类.Line_Sensor(newbit_小车类.enPos.LeftState, newbit_小车类.enLineState.White) && (newbit_小车类.Line_Sensor(newbit_小车类.enPos.RightState, newbit_小车类.enLineState.Black))) {
+                    bluetooth.uartWriteString("*@sta-1#")
+                }
+                else if (newbit_小车类.Line_Sensor(newbit_小车类.enPos.LeftState, newbit_小车类.enLineState.Black) && (newbit_小车类.Line_Sensor(newbit_小车类.enPos.RightState, newbit_小车类.enLineState.White))) {
+                    bluetooth.uartWriteString("*@sta-2#")
+                }
+                else if (newbit_小车类.Line_Sensor(newbit_小车类.enPos.LeftState, newbit_小车类.enLineState.Black) && (newbit_小车类.Line_Sensor(newbit_小车类.enPos.RightState, newbit_小车类.enLineState.Black))) {
+                    bluetooth.uartWriteString("*@sta-3#")
+                }
+                cmdType = CMD_TYPE.STA;
+            }
+
+            else if (uartData.indexOf("ser") != -1) {
+
+                StrAt = uartData.indexOf("ser")
+                dlbot_pos = parseInt(uartData.substr(StrAt + 4, 4))
+                dlbot_id = parseInt(uartData.substr(StrAt + 9, 1))
+                dlbot_speed = parseInt(uartData.substr(StrAt + 11, 2))
+                dlbot_pos = Math.map(dlbot_pos, 0, 1000, 0, 180)
+                newbit_小车类.Servo_Car(dlbot_id, dlbot_pos, dlbot_speed)
+                cmdType = CMD_TYPE.SERVO_MOVE
+            }
+            else if (uartData.indexOf("Serone") != -1) {
+                StrAt = uartData.indexOf("Serone")
+                Stm32_POS = parseInt(uartData.substr(StrAt + 7, 4))
+                Stm32_ID = parseInt(uartData.substr(StrAt + 12, 1))
+                SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
+                cmdType = CMD_TYPE.SERVO_ONE
+            }
+            else if (uartData.indexOf("Sergroup") != -1) {
+                StrAt = uartData.indexOf("Sergroup")
+                Stm32_GROUP = parseInt(uartData.substr(StrAt + 9, 3))
+                SendServoGroupToMcu(Stm32_GROUP, 1)
+                cmdType = CMD_TYPE.SERVO_GROUP
+            }
+            else if (uartData.indexOf("Sercontrol") != -1) {
+
+                StrAt = uartData.indexOf("Sercontrol")  // 
+
+                if (uartData.charAt(StrAt + 11) == 'S') {
+                    Move_T = 9
+                }
+                else if (uartData.charAt(StrAt + 11) == 'B') {
+                    Move_T = 10
+                }
+                else if (uartData.charAt(StrAt + 11) == 'L') {
+                    Move_T = 11
+                }
+                else if (uartData.charAt(StrAt + 11) == 'R') {
+                    Move_T = 12
+                }
+                else if (uartData.charAt(StrAt + 11) == '0') {
+                    Move_T = 17
+                }
+                else {
+                    Move_T = 17
+
+                }
+                SendMoveTypeToMcu(Move_T)
+                cmdType = CMD_TYPE.STM32_MOVE
+            }
+            return cmdType
+        }
+        else {
+                return -1
+             } 
+    }
+} 
