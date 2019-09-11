@@ -1354,7 +1354,7 @@ namespace newbit_小车类 {
         }
     }
 }
-/*
+
 //% color="#87CEEB" weight=24 icon="\uf1b6"
 namespace newbit_积木类 {
 
@@ -1593,7 +1593,7 @@ namespace newbit_积木类 {
                 StrAt = uartData.indexOf("ton")
                 tone = parseInt(uartData.substr(StrAt + 4, 2))
                 dlbot_beat = parseInt(uartData.substr(StrAt + 7, 1))
-                music.playTone(Tone[tone], Beat[dlbot_beat])
+            //  music.playTone(Tone[tone], Beat[dlbot_beat])
                 cmdType = CMD_TYPE.TON;
             }
             else if (uartData.indexOf("ver") != -1) {
@@ -1723,4 +1723,4 @@ namespace newbit_积木类 {
              } 
     }
 }
-*/
+
