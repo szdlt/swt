@@ -1386,7 +1386,7 @@ namespace newbit_积木类 {
     let Stm32_POS = -1
     let Stm32_ID = -1
     let Stm32_GROUP = -1
-    let Move_T = -1
+    export let Move_T = -1
     let stringReceive = ""
     let Tone = [65, 65, 73, 82, 87, 98, 110, 123,
         131, 147, 165, 175, 196, 220, 247,
